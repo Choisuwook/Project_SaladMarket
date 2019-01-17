@@ -1,0 +1,33 @@
+﻿>>> Google Maps JavaScript API 키를 얻어와야 한다.
+https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ko#key
+
+1. Get an API key 에서 "GET A KEY" 버튼을 클릭한다.
+2. 프로젝트 만들기에서 "계속" 버튼을 클릭한다.(대기시간이 조금 걸린다)
+3. 필요한 사용자 인증 정보의 종류 확인에서 Google Maps JavaScript API 가 선택되어져 있는 상태에서
+   "어떤 사용자 인증 정보가 필요한가요?" 을 클릭한다.
+4. 사용자 인증 정보 가져오기 API 키입니다. 
+   란에 AIzaSyDDQx9Q_JsWUjWyssoeEaeBGSbhvGcTyrA 같은 형식의 API 키를 복사해서 사용하면 된다.  
+   
+   AIzaSyDDQx9Q_JsWUjWyssoeEaeBGSbhvGcTyrA
+   
+   <%-- 구글맵 api 사용하기  --%>
+   <script src="http://maps.googleapis.com/maps/api/js?key=API키"></script>
+   
+   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDDQx9Q_JsWUjWyssoeEaeBGSbhvGcTyrA"></script>
+
+ 
+
+프로젝트 : My Project
+-------------------------------------------------------------------------
+  이름     생성일      유형       키
+-------------------------------------------------------------------------
+  서영학   2016.8.25   브라우저   AIzaSyDDQx9Q_JsWUjWyssoeEaeBGSbhvGcTyrA
+
+  
+ >>> 장소의 좌표(위도,경도) 구하기 
+ https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=ko
+ 
+ 장소의 좌표 구하기 란에서 진행방법대로 하면 된다.
+ 
+ 
+  
