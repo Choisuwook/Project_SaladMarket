@@ -20,6 +20,7 @@ public class ProductdetailAction extends AbstractController {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		InterEventDAO edao = new EventDAO();
+<<<<<<< HEAD
 		InterProductDAO pdao = new ProductDAO();
 		String str_pacnum = req.getParameter("pacnum");
 		String str_pnum = req.getParameter("pnum");
@@ -50,6 +51,30 @@ public class ProductdetailAction extends AbstractController {
 
 		req.setAttribute("productDetailList", productDetailList);
 		req.setAttribute("indexProdcut", indexProdcut);
+=======
+		
+		InterProductDAO pdao = new ProductDAO();
+		String str_pacnum = req.getParameter("pacnum");
+		String str_pnum = req.getParameter("pnum");
+		
+		int pacnum = Integer.parseInt(str_pacnum);
+		int pnum = Integer.parseInt(str_pnum);
+	
+		// ===전반적인 상품 패키지 정보 불러오기 ===
+		// 상품 패키지에 대한 정보
+		ProductVO indexProdcut = pdao.getIndexProductDetail(pacnum);
+
+		// === 불러온 상품 패키지에 대한 상품 상세 정보 불러오기 ===
+		List<ProductVO> productDetailList = pdao.getProductDateilList(pacnum);
+		
+		req.setAttribute("productDetailList", productDetailList);
+		req.setAttribute("indexProdcut", indexProdcut);
+		
+		// 패키지 없는 상품
+		ProductVO nopackage = pdao.noPackageProduct(pnum);
+		req.setAttribute("nopackage", nopackage);
+		
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/store/product/ProductDetail.jsp");
 		// === 불러온 상품 패키지에 대한 상품 상세정보 불러오기(상품 상세 이미지, 상품 상세 이름)

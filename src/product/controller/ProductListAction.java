@@ -17,6 +17,7 @@ public class ProductListAction extends AbstractController {
 		// ** 상품 리스트에서 상품 보여주기 **
 		InterProductDAO pdao = new ProductDAO();
 		String sdname = req.getParameter("sdname");
+<<<<<<< HEAD
 
 		int totalProductCount = pdao.getTotalCount(sdname);
 
@@ -27,6 +28,14 @@ public class ProductListAction extends AbstractController {
 
 		req.setAttribute("totalProductCount", totalProductCount);
 
+=======
+		req.setAttribute("sdname", sdname);
+		
+		List<ProductVO> packageList = pdao.getpackageList(sdname);
+		req.setAttribute("packageList", packageList);
+		
+		
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/store/product/productListAjax.jsp");
 	}

@@ -211,6 +211,7 @@ public class EventDAO implements InterEventDAO {
 		List<HashMap<String,Object>> pvoList = null;
 		try {
 				conn = ds.getConnection();	 			
+<<<<<<< HEAD
 				String sql = "\n"+
 						"select etname,rnum, pacnum, pacname, paccontents, pacimage, pnum\n"+
 						"        , sdname, ctname, stname, etname, pname, price\n"+
@@ -575,6 +576,176 @@ public class EventDAO implements InterEventDAO {
 	 }
 	
 	return totalCount;		
+=======
+		/*		String sql = "select etname,rnum, pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"        , sdname, ctname, stname, etname, pname, price\n"+
+						"        , saleprice, point, pqty, pcontents\n"+
+						"        , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"from\n"+
+						"(\n"+
+						"    select rownum as rnum,pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"            , sdname, ctname, stname, etname, pname, price\n"+
+						"            , saleprice, point, pqty, pcontents\n"+
+						"            , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"    from \n"+
+						"    (\n"+
+						"        select pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"                , sdname, ctname, stname, etname, pname, price\n"+
+						"                , saleprice, point, pqty, pcontents\n"+
+						"                , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"        from\n"+
+						"        (\n"+
+						"            select pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"                    , sdname, ctname, stname, etname, pname, price\n"+
+						"                    , saleprice, point, pqty, pcontents\n"+
+						"                    , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"            from\n"+
+						"            (\n"+
+						"                select row_number() over(partition by pacnum order by saleprice) as rno\n"+
+						"                    , b.pacnum, b.pacname, b.paccontents, b.pacimage, a.pnum\n"+
+						"                    , fk_sdname as sdname, a.fk_ctname as ctname, a.fk_stname as stname, a.fk_etname as etname\n"+
+						"                    , a.pname, a.price, a.saleprice, a.point, a.pqty, a.pcontents\n"+
+						"                    , a.pcompanyname, a.pexpiredate, allergy, a.weight, a.salecount, a.plike, a.pdate\n"+
+						"                from product a JOIN product_package b\n"+
+						"                ON a.fk_pacname = b.pacname\n"+
+						"            ) V\n"+
+						"            where rno = 1 and pacnum != 1\n"+
+						"            union all\n"+
+						"            select pacnum, pacname, paccontents, pimgfilename, pnum\n"+
+						"                    , sdname, ctname, stname, etname, pname\n"+
+						"                    , price, saleprice, point, pqty, pcontents\n"+
+						"                    , pcompanyname, pexpiredate, allergy, weight, salecount\n"+
+						"                    , plike, pdate\n"+
+						"            from\n"+
+						"            (\n"+
+						"                select row_number() over(partition by pname order by saleprice) as rno\n"+
+						"                        , b.pacnum, b.pacname, b.paccontents, b.pacimage, pnum\n"+
+						"                        , fk_sdname AS sdname, a.fk_ctname AS ctname, a.fk_stname AS stname, a.fk_etname AS etname, a.pname\n"+
+						"                        , a.price, a.saleprice, a.point, a.pqty, a.pcontents\n"+
+						"                        , a.pcompanyname, a.pexpiredate, allergy, a.weight, a.salecount\n"+
+						"                        , a.plike, a.pdate, c.pimgfilename\n"+
+						"                from product a JOIN product_package b\n"+
+						"                ON a.fk_pacname = b.pacname\n"+
+						"                JOIN product_images c\n"+
+						"                ON a.pnum = c.fk_pnum\n"+
+						"                where pacnum = 1\n"+
+						"            ) V\n"+
+						"            where rno = 1\n"+
+						"        )T\n"+
+						"       \n"+
+						"        where etname = ? \n"+
+						"        order by pdate desc, pname asc\n"+
+						"    ) E\n"+
+						") F\n"+
+						"where 1=1";*/
+				String sql = "select etname,rnum, pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"        , sdname, ctname, stname, etname, pname, price\n"+
+						"        , saleprice, point, pqty, pcontents\n"+
+						"        , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"from\n"+
+						"(\n"+
+						"    select rownum as rnum,pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"            , sdname, ctname, stname, etname, pname, price\n"+
+						"            , saleprice, point, pqty, pcontents\n"+
+						"            , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"    from \n"+
+						"    (\n"+
+						"        select pacnum, pacname, paccontents, pacimage, pnum\n"+
+						"                , sdname, ctname, stname, etname, pname, price\n"+
+						"                , saleprice, point, pqty, pcontents\n"+
+						"                , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate\n"+
+						"        from view_Product       \n"+
+						"        where etname = ? \n"+
+						"        order by pdate desc, pname asc\n"+
+						"    )E\n"+
+						") F\n"+
+						" where rnum between ? and ? ";
+				pstmt= conn.prepareStatement(sql);
+				pstmt.setString(1,etname);
+				pstmt.setInt(2,startRno);
+				pstmt.setInt(3,endRno);
+				rs = pstmt.executeQuery();
+				
+				int cnt=0;
+
+				while(rs.next()) {
+					cnt++;					
+					if(cnt == 1) pvoList = new ArrayList<HashMap<String,Object>>();
+					 
+					String stname = rs.getString("stname");
+					int saleprice =  rs.getInt("saleprice");
+					String pacname = rs.getString("pacname");
+					String pacimage = rs.getString("pacimage");
+					String v_etname = rs.getString("etname");
+					System.out.println("Event NAME"+etname);
+			
+			
+					
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("etname", v_etname);
+					map.put("saleprice",saleprice);
+					map.put("pacname",pacname);
+					map.put("pacimage",pacimage);
+					map.put("stname",stname);
+					
+					pvoList.add(map);					
+				}		
+			} finally {
+				close();
+			}
+			return pvoList;
+	}
+	
+	// == 쿠폰 페이지에서 나의 쿠폰 내역 불러오기 
+	@Override
+	public List<HashMap<String,String>> getCouponList(String userid) throws SQLException{
+		conn = ds.getConnection();
+		List<HashMap<String,String>> couponList = null;
+		
+		try {
+			
+			String sql = "select A.fk_userid ,A.cpexpiredate,A.cpstatus,B.cpnum,B.cpname,B.discountper,cpusemoney,cpuselimit\n"+
+					"from my_coupon A join coupon B\n"+
+					"on A.fk_cpnum = B.cpnum\n"+
+					"where fk_userid= ? and cpexpiredate > sysdate ";
+
+
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userid);
+			rs = pstmt.executeQuery();
+
+			int cnt = 0;		
+			while(rs.next()) {
+				cnt++;
+				if(cnt ==1) couponList = new ArrayList<HashMap<String,String>>();
+				
+				String v_userid = rs.getString("fk_userid");
+				String cpexpiredate = rs.getString("cpexpiredate");
+				String cpstatus = rs.getString("cpstatus");
+				String cpname = rs.getString("cpname");
+				String discountper = rs.getString("discountper");
+				String cpusemoney = rs.getString("cpusemoney");
+				String cpuselimit = rs.getString("cpuselimit");
+	
+				HashMap<String, String> map = new HashMap<String,String>();
+
+				map.put("fk_userid",v_userid);
+				map.put("cpexpiredate",cpexpiredate);
+				map.put("cpstatus",cpstatus);
+				map.put("cpname",cpname);
+				map.put("discountper",discountper);
+				map.put("cpusemoney",cpusemoney);
+				map.put("cpuselimit",cpuselimit);
+				
+				couponList.add(map);
+			}		
+			
+		} finally {
+			close();
+		}		
+		return couponList;
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 	}
 	
 }// end of DAO

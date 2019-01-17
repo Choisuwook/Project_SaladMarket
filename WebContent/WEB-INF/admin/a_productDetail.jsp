@@ -67,6 +67,7 @@
               <div class="card-body">
                 <div class="typography-line">
                   <h4>
+<<<<<<< HEAD
                     <span>상품번호</span>${pvo.pnum}</h4>
                 </div>
                 <div class="typography-line">
@@ -151,6 +152,95 @@
                 <div class="typography-line"> 
                  <img src="<%= ctxPath %>/img/${pvoImg.pimgfilename}" style="width: 30%;">
                  </div>
+=======
+                    <span>상품번호</span>1</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>상품패키지명</span>[퀸즈프레시] 프리미엄 샐러드 3종</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>대분류</span>샐러드</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>소분류</span>샐러드도시락</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>카테고리태그</span>다이어트용</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>스펙태그</span>HIT</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>이벤트태그</span>크리스마스 이벤트</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>상품명</span>베리&리코타</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>원가</span>6,900원</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>판매가</span>6,900원</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>포인트</span>690point</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>재고량</span>100</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>납품회사</span>queensfresh</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>유통기한</span>제조일로부터 5일</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>용량</span>245g</h4>
+                </div>
+                <div class="typography-line"></div>
+                <div class="typography-line">
+                  <h4>
+                    <span>판매량</span>30</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>좋아요수</span>30</h4>
+                </div>
+                <div class="typography-line">
+                  <h4>
+                    <span>상품등록일자</span>2018-11-28</h4>
+                </div>
+                <div class="typography-line">
+                  <p>
+                  <span>알레르기 정보</span>
+                   	 난류, 땅콩, 소고기, 닭고기, 새우와 같은 시설에서 생산
+                  </p>
+                </div>
+                <div class="typography-line">
+                  <p>
+                    <span>상품 상세 설명</span>
+                      	리코타 치즈는 부드러운 질감과 고소하면서도 살짝 시큼한 맛이 여심을 저격하는 대표 음식으로 칼슘은 물론 오메가 3와 6가 풍부하죠.<br/>
+                      	여기에 상큼한 맛이 톡 튀며 즐거움을 안기는 아로니아, 블루베리, 크랜베리 등을 담아 칼로리 부담을 낮췄어요.<br/>
+                      	베리류에는 비타민, 안토시아닌 등의 성분이 풍부하답니다.<br/>
+                      	이탈리아산 포도 과즙으로 만들어진 발사믹 드레싱은 샐러드의 산뜻함을 한층 더해 줄 거예요.<br/>
+                   		<img src="<%= ctxPath %>/img/berry_ricotta.jpg" style="width: 30%;">
+                  </p>
+                </div>
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
                 <div class="button" align="center">
                 	<button class="btn btn-primary animation-on-hover" type="button" OnClick="goEdit();">수정하기</button>
                 	<button class="btn btn-danger animation-on-hover" type="button">삭제하기</button>

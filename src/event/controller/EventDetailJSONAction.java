@@ -27,6 +27,7 @@ public class EventDetailJSONAction extends AbstractController{
 	
 		
 		if(start==null || start.trim().isEmpty()) start = "1";
+<<<<<<< HEAD
 		if(len==null || len.trim().isEmpty()) len = "8";
 		if(etname==null || etname.trim().isEmpty()) etname = "크리스마스 이벤트";
 		int startRno = Integer.parseInt(start);
@@ -58,6 +59,39 @@ public class EventDetailJSONAction extends AbstractController{
 				jsonObj.put("pimgfilename", evo.get("pimgfilename"));
 				jsonObj.put("pacnum", evo.get("pacnum"));
 				jsonArray.add(jsonObj);				
+=======
+		if(len==null || len.trim().isEmpty()) len = "4";
+		if(etname==null || etname.trim().isEmpty()) etname = "크리스마스 이벤트";
+		int startRno = Integer.parseInt(start);
+		// 공식!!!  시작행번호      1           5              9
+		
+		int endRno = startRno+Integer.parseInt(len)-1;
+		// 공식!!!   끝행번호       4(=> 1+4-1)  8(=> 8+4-1)   24(=> 17+8-1) 
+
+		InterEventDAO dao = new EventDAO();
+		
+		InterProductDAO pdao = new ProductDAO();
+		
+		String etnum = req.getParameter("etnum");
+		
+		List<HashMap<String,Object>> eventProductList = dao.getEventList2(etname, startRno, endRno);
+		
+		JSONArray jsonArray = new JSONArray();
+		
+		if(eventProductList != null && eventProductList.size() > 0) {
+			for(HashMap<String, Object> evo : eventProductList) {
+				System.out.println("indexBestJSONAction2");		
+				JSONObject jsonObj = new JSONObject();
+				// JSONObject 는 JSON형태(키:값)의 데이터를 관리해주는 클래스이다. 
+				jsonObj.put("stname", evo.get("stname"));
+				jsonObj.put("saleprice", evo.get("saleprice"));
+				jsonObj.put("pacname", evo.get("pacname"));				
+				jsonObj.put("pacimage", evo.get("pacimage"));	
+				jsonObj.put("etname", evo.get("etname"));
+				
+				jsonArray.add(jsonObj);
+				
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 			}// end of for--------------------
 		}
 		

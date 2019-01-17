@@ -209,12 +209,16 @@
               <p>물품 수정</p>
             </a>
           </li>
+<<<<<<< HEAD
                     <li>
             <a href="<%= ctxPath %>/a_productPackageList.do">
               <i class="tim-icons icon-puzzle-10"></i>
               <p>패키지 상품 목록</p>
             </a>
           </li>
+=======
+          
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
           <li>
             <a href="<%= ctxPath %>/a_productList.do">
               <i class="tim-icons icon-puzzle-10"></i>

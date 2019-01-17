@@ -16,6 +16,7 @@ public interface InterEventDAO {
 	List<HashMap<String,Object>> getEventList2(String etname,int startRno,int endRno) throws SQLException;
 	// == 쿠폰 페이지에서 나의 쿠폰 내역 불러오기 
 	List<HashMap<String,String>> getCouponList(String userid) throws SQLException;
+<<<<<<< HEAD
 	// == 이벤트 별 패키지 총갯수 불러오기
 	int getEventTotalCount(String etname) throws SQLException;
 	
@@ -25,4 +26,6 @@ public interface InterEventDAO {
 	// == 이벤트별 패키지 없는 총 갯수 불러오기
 	int getNoPacEventTotalCount(String etname) throws SQLException;
 	
+=======
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 }

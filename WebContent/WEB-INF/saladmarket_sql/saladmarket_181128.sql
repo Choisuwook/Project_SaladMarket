@@ -1541,6 +1541,7 @@ insert into product_images (pimgnum, pimgfilename, fk_pnum)
 values(seq_product_images_pimgnum.nextval,'milk2.jpg', 47);
 --------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 create or replace trigger trg_package
 after update of pacname on product_package for each row
 begin
@@ -1779,3 +1780,212 @@ select *
 from product;
 
 
+=======
+
+
+
+select *
+from product
+order by pnum asc;
+
+
+select *
+from product_images
+order by pimgnum asc;
+
+select *
+from product_package
+order by pacnum asc;
+
+commit;
+
+ select *
+ from member;
+ 
+ drop table login purge;
+ update member set pw ='qwer1234$' where userid='leess';
+ alter table member add(pw varchar2(200));
+ alter table member modify(pw varchar2(200) not null); 
+
+select min(saleprice),pacnum,pacname
+from (
+    select pacnum,pacname,paccontents,pacimage,saleprice,point
+    from product_package A join product B
+    on A.pacname = B.fk_pacname
+    where pacname = '[퀸즈프레시] 프리미엄 샐러드 3종'
+);
+
+select *
+from product_package;
+select*
+from product; 
+select *
+from event_tag;
+
+select *
+from (select saleprice,fk_pacname,pacimage
+from product_package A join 
+(
+    select min(saleprice) AS saleprice,fk_pacname,etname
+    from (
+        select fk_pacname,price,B.etname,saleprice
+        from product A join event_tag B
+        on A.fk_etname = B.etname
+    )
+    group by fk_pacname
+    having fk_pacname like '[퀸즈프레시] 프리미엄 샐러드 3종'
+)C
+on C.fk_pacname = A.pacname );
+
+--select *
+--from product
+--where fk_pacname like '[퀸즈프레시] 프리미엄 샐러드 3종
+--where 
+--union all
+--select *
+--from event_tag
+--where fk_pacname like '[퀸즈프레시] 프리미엄 샐러드 3종';
+--sleelct *
+--from product; 
+
+--select saleprice,fk_pacname,pacimage
+--from product_package A join 
+--(
+--    select min(saleprice) AS saleprice,fk_pacname
+--    from (
+--        select fk_pacname,price,etname,saleprice
+--        from product A join event_tag B
+--        on A.fk_etname = B.etname
+--    )
+--    group by fk_pacname
+--    having fk_pacname like '[퀸즈프레시] 프리미엄 샐러드 3종'
+--)C
+--on C.fk_pacname = A.pacname; 
+
+select min(saleprice),fk_etname
+from product 
+group by fk_etname;
+where fk_etname like '크리스마스 이벤트' ; 
+
+
+select *
+from product;
+-- product테이블 event_tag 테이블 뷰 --
+create or replace view product_event
+as
+select pnum,fk_pacname,fk_sdname,fk_ctname,fk_stname,fk_etname,pname,price,saleprice,point,pqty,pcontents,pexpiredate,allergy,weight,salecount,plike,pdate,etnum,etname,etimagefilename
+from product A join event_tag B
+on A.fk_etname = B.etname
+order by pnum;
+
+--------------------
+
+select salapriceRank, saleprice,fk_pacname,pacimage,fk_stname
+    from 
+(
+    select row_number() over(order by saleprice) AS salapriceRank, saleprice,fk_pacname,pacimage,fk_stname
+    from 
+    (
+        select C.pnum,fk_pacname,C.saleprice,C.fk_sdname,C.fk_ctname,C.fk_stname,C.fk_etname,C.pname,C.price,C.point,C.pqty,C.pcontents,C.pexpiredate,C.allergy,C.weight,C.salecount,C.plike,C.pdate,C.fk_etname
+                   ,D.pacnum,D.paccontents,D.pacimage
+            from (
+                select A.pnum,A.pname,A.fk_pacname,A.fk_sdname,A.fk_ctname,A.fk_stname,A.fk_etname,A.price,A.saleprice,A.point,A.pqty,A.pcontents,A.pexpiredate,A.allergy,A.weight,A.salecount,A.plike,A.pdate,B.etnum,B.etname,B.etimagefilename
+                from product A join event_tag B
+                on A.fk_etname = B.etname
+                where B.etname='크리스마스 이벤트' 
+                order by pnum
+            )C join product_package D
+        on C.fk_pacname = D.pacname
+        where fk_pacname = '[자연마을] 과일 주스 8종'
+    )
+)
+where salapriceRank = 1;
+
+
+----------------------------------
+    select fk_pacname,saleprice,pacimage,fk_stname
+    from 
+        (   
+            select fk_pacname, min(saleprice) AS saleprice
+            from 
+                (
+                select row_number() over(order by saleprice) AS salapriceRank, saleprice,fk_pacname,pacimage
+                from 
+                (
+                    select C.pnum,fk_pacname,C.saleprice,C.fk_sdname,C.fk_ctname,C.fk_stname,C.fk_etname,C.pname,C.price,C.point,C.pqty,C.pcontents,C.pexpiredate,C.allergy,C.weight,C.salecount,C.plike,C.pdate,C.fk_etname
+                               ,D.pacnum,D.paccontents,D.pacimage
+                        from (
+                            select A.pnum,A.pname,A.fk_pacname,A.fk_sdname,A.fk_ctname,A.fk_stname,A.fk_etname,A.price,A.saleprice,A.point,A.pqty,A.pcontents,A.pexpiredate,A.allergy,A.weight,A.salecount,A.plike,A.pdate,B.etnum,B.etname,B.etimagefilename
+                            from product A join event_tag B
+                            on A.fk_etname = B.etname
+                            where B.etname='크리스마스 이벤트' 
+                            order by pnum
+                        )C join product_package D
+                    on C.fk_pacname = D.pacname
+                )
+            )
+            group by fk_pacname          
+        )A join product_package B
+        on A.fk_pacname = B.pacname;
+
+-------------------------
+
+select *
+from product;
+commit;
+
+select rnum, pacnum, pacname, paccontents, pacimage, pnum 
+        , sdname, ctname, stname, etname, pname, price
+        , saleprice, point, pqty, pcontents
+        , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate 
+ from
+ (
+    select rownum as rnum,pacnum, pacname, paccontents, pacimage, pnum 
+            , sdname, ctname, stname, etname, pname, price 
+            , saleprice, point, pqty, pcontents 
+            , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate 
+    from view_Product 
+        where stname = 'NEW' and pacname != '없음' 
+        order by rnum asc, pname asc 
+ ) F;
+ 
+ create or replace view view_Product 
+ as
+   select pacnum, pacname, paccontents, pacimage, pnum
+                    , sdname, ctname, stname, etname, pname, price
+                    , saleprice, point, pqty, pcontents
+                    , pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate
+            from
+            (
+                select row_number() over(partition by pacnum order by saleprice) as rno
+                    , b.pacnum, b.pacname, b.paccontents, b.pacimage, a.pnum
+                    , fk_sdname as sdname, a.fk_ctname as ctname, a.fk_stname as stname, a.fk_etname as etname
+                    , a.pname, a.price, a.saleprice, a.point, a.pqty, a.pcontents
+                    , a.pcompanyname, a.pexpiredate, allergy, a.weight, a.salecount, a.plike, a.pdate
+                from product a JOIN product_package b
+                ON a.fk_pacname = b.pacname
+            ) V
+            where rno = 1 and pacnum != 1
+            union all
+            select pacnum, pacname, paccontents, pimgfilename, pnum
+                    , sdname, ctname, stname, etname, pname
+                    , price, saleprice, point, pqty, pcontents
+                    , pcompanyname, pexpiredate, allergy, weight, salecount
+                    , plike, pdate
+            from
+            (
+                select row_number() over(partition by pname order by saleprice) as rno
+                        , b.pacnum, b.pacname, b.paccontents, b.pacimage, pnum
+                        , fk_sdname AS sdname, a.fk_ctname AS ctname, a.fk_stname AS stname, a.fk_etname AS etname, a.pname
+                        , a.price, a.saleprice, a.point, a.pqty, a.pcontents
+                        , a.pcompanyname, a.pexpiredate, allergy, a.weight, a.salecount
+                        , a.plike, a.pdate, c.pimgfilename
+                from product a JOIN product_package b
+                ON a.fk_pacname = b.pacname
+                JOIN product_images c
+                ON a.pnum = c.fk_pnum
+                where pacnum = 1
+            ) V
+            where rno = 1;
+ ------------------------------------------------------------------------------------
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git

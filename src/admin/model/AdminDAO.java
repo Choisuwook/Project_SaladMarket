@@ -70,6 +70,7 @@ public void close() {
 	public boolean getLogin(String adminId, String adminPwd) throws SQLException {
 		boolean flag = false;		
 		try {
+<<<<<<< HEAD
 
 				conn = ds.getConnection();
 		
@@ -81,6 +82,19 @@ public void close() {
 				pstmt.setString(1, adminId);
 				//pstmt.setString(2,SHA256.encrypt(adminPwd));
 				pstmt.setString(2, adminPwd);
+=======
+				conn = ds.getConnection();
+		
+				String sql = " select dminid,adminpw "
+							+" from login "
+							+" where dminid = ? and adminpw = ? "; 
+	
+				
+				pstmt= conn.prepareStatement(sql);
+				pstmt.setString(1, adminId);
+				pstmt.setString(2,SHA256.encrypt(adminPwd));
+				
+>>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 				rs = pstmt.executeQuery();				
 				boolean bool = rs.next();
 				if(bool){//회원이 존재하는 경우=> 로그인이 되었을 경우
