@@ -14,21 +14,13 @@ public class EventAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
+
 		InterEventDAO edao = new EventDAO();
-<<<<<<< HEAD
 		String etname = req.getParameter("etname");
-		
+
 		List<EventVO> eventList = edao.getEventList();
 
 		req.setAttribute("eventList", eventList);		
-=======
-		
-		List<EventVO> eventList = edao.getEventList();
-	
-		req.setAttribute("eventList", eventList);
-		
->>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/store/event/event.jsp");
 

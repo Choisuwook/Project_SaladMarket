@@ -15,7 +15,7 @@ public class A_ProductDetailAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-	
+
 		InterProductDAO pdao = new ProductDAO();
 		String pnum = req.getParameter("pnum");
 		System.out.println("pnum: "+pnum);
@@ -25,7 +25,7 @@ public class A_ProductDetailAction extends AbstractController {
 		req.setAttribute("pvoImg", pvoImg);
 		req.setAttribute("pvo", pvo);	
 		req.setAttribute("pnum", pnum);
-		
+
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/admin/a_productDetail.jsp");
 

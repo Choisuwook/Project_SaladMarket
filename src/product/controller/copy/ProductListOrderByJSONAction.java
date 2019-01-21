@@ -17,17 +17,17 @@ public class ProductListOrderByJSONAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-	
+
 	InterProductDAO pdao = new ProductDAO();
-	
+
 	String order = req.getParameter("order");
 	String sdname = req.getParameter("sdname");	
-	
+
 	List<ProductVO> packageList = pdao.getpackageList(sdname,order);
 	JSONArray jsonArray = new JSONArray();
 	if(packageList != null && packageList.size() > 0) {
 		for(ProductVO pvo : packageList) {
-		
+
 			JSONObject jsonObj = new JSONObject();
 			// JSONObject 는 JSON형태(키:값)의 데이터를 관리해주는 클래스이다. 			 
 			jsonObj.put("stname", pvo.getFk_stname());				
@@ -39,9 +39,9 @@ public class ProductListOrderByJSONAction extends AbstractController {
 			jsonObj.put("price", pvo.getPrice());
 			jsonObj.put("pacnum", pvo.getPacnum());
 			jsonObj.put("pnum", pvo.getPnum());
-			
+
 			jsonArray.add(jsonObj);
-			
+
 		}// end of for--------------------
 	}
 

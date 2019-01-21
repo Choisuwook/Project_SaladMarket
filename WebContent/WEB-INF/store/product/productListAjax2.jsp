@@ -34,8 +34,6 @@
 	    border: 0px solid #ccc;
 	    border-top: none;
 	}
-
-
 </style>
 
 <script>
@@ -88,14 +86,12 @@
 		   				$("#displayResultBEST").append(html);
 		   					   			
 		   			  }// end of else
-
 		   		  }, //end of success
 	   		  error: function(request, status, error){
 	   				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 	   			}		   
 	   	   });// end of ajax
 	    });// end of $(".tablinks").click(function(evnet){
-
 	// ==== BEST/NEW/HIT 의 상품보기 끝 ==== 
 		
 	});
@@ -127,7 +123,8 @@
 					
 				}else{// 데이터가 존재하는 경우라면					
 					$.each(json, function(entryIndex, entry){ 
-			        	  html += "<div style=\"display: inline-block; margin: 30px; border: solid gray 1px;\" align=\"left\">" 
+			        	  html += "<div style=\"display: inline-block; margin: 30px; border: solid gray 1px;\" align=\"left\">"+
+			        	  		  "<input type='text' value='"+${entry.pacname}+"'/>" 
 			        	        + "  <a href=\"/MyMVC/prodView.do?pnum="+entry.pnum+"\">"
 			        	        + "    <img width=\"120px;\" height=\"130px;\" src=\"images/"+entry.pimage1+"\">"
 			        	        + "  </a><br/>"
@@ -192,7 +189,6 @@ function openCity(evt, cityName) {
 		}  // end of function
 		
    window.innerWidth 
-
 </script>
 
 <aside id="colorlib-hero" class="breadcrumbs">
@@ -241,7 +237,7 @@ function openCity(evt, cityName) {
 		</div> <!-- 스펙태그  끝 -->
 	 </form>	
 </div> <!-- horizontal -->
- 
+
 <!-- Navbar Area-->
 
 <div class="classy-nav-container breakpoint-off">
@@ -252,14 +248,14 @@ function openCity(evt, cityName) {
 			<div class="classy-navbar-toggler">
 				<span class="navbarToggler"><span></span><span></span><span></span></span>
 			</div>
-		
+
 			<!-- Nav Start -->
 			<div class="classynav">
 				<div class="search-form" >
 					<form action="#" method="get">
 						<ul style="margin: 0 auto;">													
 							</li>
-							
+
 							<li style="float: right;">
 								<div class="dropdown">
 									<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 0; height: 50px; background-color: #FFC300;">정렬<span class="caret"></span></button>
@@ -313,5 +309,5 @@ function openCity(evt, cityName) {
          </div>
       </div>
 </div>
- 
-<jsp:include page="../footer.jsp"/>
+
+<jsp:include page="../footer.jsp"/> 

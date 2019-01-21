@@ -4,29 +4,23 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
  <jsp:include page="../header.jsp"/>
-   
+
    <script type="text/javascript">
 	$(document).ready(function() {
-		
 		$("#option").change(function () {
-			var pnum = $(this).val();
-			
-<<<<<<< HEAD
+			var pnum = $(this).val();			
 			var html = "<tr>"
 	               +"<th style='width: 400px; height:35px border: 1px solid red;>단품골라담기 /</th>"
-	               +"<td style='width: 400px; height:35px;'>"+$("#select"+pnum).html()
-	               +"<input type='number' id='"+$("#oqty"+pnum)+"' name='oqty' value='1' max='100' min='1' style='width: 50px; height: 30px;'/></td>"
-	               +"</tr> "             
-			if(pnum != $(this).val()) $("#addList").append(html);
-			else alert("해당 상품은 선택되어있습니다.");
+	               +"<td style='width: 400px; height:35px;'>"+$("#option"+pnum).html()
+	               +"<input type='number' id='option"+pnum+"' name='oqty' value='1' max='100' min='1' style='width: 50px; height: 30px;'/></td>"
+	               +"</tr> ";
+	               $("#addList").append(html);
+		
 		});
 		  
 	});// end of $(document).ready(function()	
-		$("#oqty")
 
    </script>
-
-
 
 	<aside id="colorlib-hero" class="breadcrumbs">
 			<div class="flexslider">
@@ -57,11 +51,11 @@
 								<div class="col-md-5">
 									<div class="product-entry">
 									<!-- 상품 대표이미지 -->
-										<c:if test="${packageDetail.pacnum != 1}">
+										<c:if test="${pacnum!= 1}">
 										   <div class="product-img" style="background-image: url(<%= ctxPath %>/img/${packageDetail.pacimage});"> 
 											</div>
 										</c:if>
-										<c:if test="${packageDetail.pacnum == 1}">
+										<c:if test="${pacnum == 1}">
 										   <div class="product-img" style="background-image: url(<%= ctxPath %>/img/${packageDetail.pimgfilename});"> <!-- 상품 대표이미지 -->
 											</div>
 										</c:if>
@@ -69,60 +63,59 @@
 								</div>
 								<div class="col-md-7">
 									<div class="desc">
-									
-										
+
+
 		     <div class="col-md-12">
-									<div class="desc">
-									<c:if test="${indexProdcut.pacname == '없음'}"><h3>${nopackage.pname}</h3></c:if>
-									<c:if test="${indexProdcut.pacname != '없음'}"><h3>${indexProdcut.pacname}</h3></c:if>	 	
-										
-										<div style="margin-top:5%; border: 1px solid red">
-											<div class="row" style="border: 1px solid red">
-											  <div class="col-md-12" style="border: 1px solid blue">
-												   <div class="col-md-4" style="border: 1px solid blue">판매가</div>
-												   <div class="col-md-7"><fmt:formatNumber value="${indexProdcut.saleprice}" pattern="###,###"></fmt:formatNumber>원</div>
-											   </div>
-											   <div class="col-md-12" style="border: 1px solid blue">
-												   <div class="col-md-4" style="border: 1px solid blue">판매단위</div>
-												   <div class="col-md-7">PK</div>
-											   </div> 
-											   <div class="col-md-12" style="border: 1px solid blue">
-												   <div class="col-md-4" style="border: 1px solid blue">중량/용량</div>
-												   <div class="col-md-7">${packageDetail.weight}</div>
-											   </div> 
-											   <tr>
-												   <th style="width: 100px; height:50px;">포장타입</th>
-													<td >냉장/에코포장
-														<span >택배배송은 에코포장이 스티로폼으로 대체됩니다.</span>
-													</td>
-												</tr>	
-												<tr>
-													<th style="width: 100px; height:50px;">알레르기 정보</th>
-													<td >${indexProdcut.allergy}</td>
-												</tr>
-											
-											<tr>
-												<th style="width: 100px; height:50px;">유통기한</th>
-												<td >${indexProdcut.pexpiredate}</td>
-												</tr>
-											
+				<div class="desc">
+					<c:if test="${pacnum== 1}"><h3>${packageDetail.pname}</h3></c:if>
+					<c:if test="${pacnum!= 1}"><h3>${packageDetail.pacname}</h3></c:if>	 	
+						<div style="margin-top:5%; border: 1px solid red">
+							<div class="row" style="border: 1px solid red">
+								<div class="col-md-12" style="border: 1px solid blue">
+									<div class="col-md-4" style="border: 1px solid blue">판매가</div>
+									<div class="col-md-7"><fmt:formatNumber value="${packageDetail.saleprice}" pattern="###,###"></fmt:formatNumber>원</div>
+								</div>
+								<div class="col-md-12" style="border: 1px solid blue">
+									   <div class="col-md-4" style="border: 1px solid blue">판매단위</div>
+									   <div class="col-md-7">PK</div>
+								   </div> 
+								   <div class="col-md-12" style="border: 1px solid blue">
+									   <div class="col-md-4" style="border: 1px solid blue">중량/용량</div>
+									   <div class="col-md-7">${packageDetail.weight}</div>
+								   </div> 
+								   <div>
+									   <th style="width: 100px; height:50px;">포장타입</th>
+										<td >냉장/에코포장
+											<span >택배배송은 에코포장이 스티로폼으로 대체됩니다.</span>
+										</td>
+									</div>	
+									<div>
+										<div style="width: 100px; height:50px;">알레르기 정보</div>
+										<div >${packageDetail.allergy}</div>
+									</div>
+								<div>
+									<div style="width: 100px; height:50px;">유통기한</div>
+									<div>${packageDetail.pexpiredate}</div>
+								</div>
+
 											<%-- 상품선택 옵션 --%>
-											<c:if test="${indexProdcut.pacnum != '1'}">
+											<c:if test="${pacnum!= 1}">
+											
 												<tr>
 													<th style="width: 80px; height:50px;"> 상품 선택</th>													
 														<td>													
-															<select name="addopt[]" label="단품골라담기" onchange="nsGodo_MultiOption.set();" id="option" >
-																	  <option value="">==단품골라담기 선택==</option>
-																<c:forEach var="productList" items="${productDetailList}"> 
-																	  <option id="select${productList.pnum}" value="${productList.pnum}" >${productList.pname}(${productList.saleprice})</option>
-																</c:forEach> 
+															<select name="addopt[]" label="단품골라담기" onchange="nsGodo_MultiOption(event);" id="option" >
+																<option value="">==단품골라담기 선택==</option>																  
+									 			 				<c:forEach var="productList" items="${packageDetailList}"> 
+																	  <option id="option${productList.pnum}" name="${productList.pname}" value="${productList.pnum}">${productList.pname}</option>
+																</c:forEach>  
 															</select>														
 														</td>
 											    </tr>
 										    </c:if>
-						
+
 										    <%-- 상품선택 옵션 --%>
-<%-- 										    <c:if test="${indexProdcut.pacname != '없음'}">
+<%-- 										    <c:if test="${packageDetail.pacname != '없음'}">
 										 		<tr>
 													<th style="width: 100px; height:50px;"> 상품 선택</th>													
 														<td>													
@@ -138,7 +131,7 @@
 										 	<div id="addList" style="border: 1px solid blue;" width="600px;"></div>										 	
 										 </div>	
 										 <div>
-										 
+
 										 	<div>상품 갯수</div>
 										 	<div><input id="qpty" name="pqty" type="number" style="width: 50px; height: 30px;"min="1" max="10" step="1" value="1" /></div>										 	
 										 </div>										 
@@ -151,12 +144,12 @@
                                  	</div>
                         		 </div>
 							</div>
-														
+
 								</div>
-							
+
 			</div>
-									
-														
+
+
 <%-- 					<ul style="list-style-type: none">
 											<li><button type="button" class="btn btn-info" style="margin-right: 10px" onClick="goCart('${pvo.pnum}');">장바구니 담기</button>
 							<button type="button" class="btn btn-warning" style="margin-right: 10px" onClick="goOrder('${pvo.pnum}');">바로주문하기</button>
@@ -185,197 +178,12 @@
 								<div class="tab-content"> <!-- 상품 상세 설명 내용  -->
 									<div id="description" class="tab-pane fade in active">
 										<p>${pacontents}</p>
-=======
-			  var html = "<tr>"
-	               +"<th style='width: 400px; height:35px border: 1px solid red;>단품골라담기 /</th>"
-	               +"<td style='width: 400px; height:35px;'>"+$("#select"+pnum).html()
-	               +"<input type='number' id='"+$("#oqty"+pnum)+"' name='oqty' value='1' max='100' min='1' style='width: 50px; height: 30px;'/></td>"
-	               +"</tr> "             
-			
-			$("#addList").append(html);
-			
-		});
-		  
-	});// end of $(document).ready(function()	
-		$("#oqty")
-
-   </script>
-
-
-
-	<aside id="colorlib-hero" class="breadcrumbs">
-			<div class="flexslider">
-				<ul class="slides">
-			   	<li style="background-image: url(<%=ctxPath %>/store/images/cover-img-1.jpg);">
-			   		<div class="overlay"></div>
-			   		<div class="container-fluid">
-			   			<div class="row">
-				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
-				   				<div class="slider-text-inner text-center">
-				   					<h1>Product Detail</h1>
-				   					<h2 class="bread"><span><a href="index.html">Home</a></span> <span><a href="shop.html">Product</a></span> <span>Product Detail</span></h2>
-				   				</div>
-				   			</div>
-				   		</div>
-			   		</div>
-			   	</li>
-			  	</ul>
-		  	</div>
-		</aside>
-    <%-- 여기서부터 --%>
-   <div class="colorlib-shop">
-			<div class="container">
-				<div class="row row-pb-lg">
-					<div class="col-md-10 col-md-offset-1">
-						<div class="product-detail-wrap">
-							<div class="row">
-								<div class="col-md-5">
-									<div class="product-entry">
-									<!-- 상품 대표이미지 -->
-										<c:if test="${indexProdcut.pacname != '없음'}">
-										   <div class="product-img" style="background-image: url(<%= ctxPath %>/img/${indexProdcut.pacimage});"> 
-											</div>
-										</c:if>
-										<c:if test="${indexProdcut.pacname == '없음'}">
-										   <div class="product-img" style="background-image: url(<%= ctxPath %>/img/${nopackage.pimgfilename});"> <!-- 상품 대표이미지 -->
-											</div>
-										</c:if>
-									</div>
-								</div>
-								<div class="col-md-7">
-									<div class="desc">
-									
-										
-		     <div class="col-md-12">
-									<div class="desc">
-									<c:if test="${indexProdcut.pacname == '없음'}"><h3>${nopackage.pname}</h3></c:if>
-									<c:if test="${indexProdcut.pacname != '없음'}"><h3>${indexProdcut.pacname}</h3></c:if>	 	
-										
-										<table style="margin-top:10px">
-											<tbody>
-											  <tr>
-												   <th style="width: 100px; height:50px;">판매가</th>
-												   <td ><fmt:formatNumber value="${indexProdcut.saleprice}" pattern="###,###"></fmt:formatNumber>원</td>
-											   </tr> 
-											   <tr>
-												    <th style="width: 100px; height:50px;">판매단위</th>
-													<td >PK</td>
-												</tr>
-													<tr>
-														<th style="width: 100px; height:50px;">중량/용량</th>
-													<td >옵션별 상이</td>
-											   </tr>
-											   <tr>
-												   <th style="width: 100px; height:50px;">포장타입</th>
-													<td >냉장/에코포장
-														<span >택배배송은 에코포장이 스티로폼으로 대체됩니다.</span>
-													</td>
-												</tr>	
-												<tr>
-													<th style="width: 100px; height:50px;">알레르기 정보</th>
-													<td >${indexProdcut.allergy}</td>
-												</tr>
-											
-											<tr>
-												<th style="width: 100px; height:50px;">유통기한</th>
-												<td >${indexProdcut.pexpiredate}</td>
-												</tr>
-											
-											<%-- 상품선택 옵션 --%>
-											<c:if test="${indexProdcut.pacnum != '1'}">
-												<tr>
-													<th style="width: 100px; height:50px;"> 상품 선택</th>													
-														<td>													
-															<select name="addopt[]" label="단품골라담기" onchange="nsGodo_MultiOption.set();" id="option" >
-																	  <option value="">==단품골라담기 선택==</option>
-																<c:forEach var="productList" items="${productDetailList}"> 
-																	  <option id="select${productList.pnum}" value="${productList.pnum}" >${productList.pname}(${productList.saleprice})</option>
-																</c:forEach> 
-															</select>														
-														</td>
-											    </tr>
-										    </c:if>
-						
-										    <%-- 상품선택 옵션 --%>
-<%-- 										    <c:if test="${indexProdcut.pacname != '없음'}">
-										 		<tr>
-													<th style="width: 100px; height:50px;"> 상품 선택</th>													
-														<td>													
-															<input type="text" value="${indexPro.pname}" />
-														</td>
-											    </tr>
-											   </c:if> --%>
-										 <tr>
-											 <th>총 금액 </th>
-											 <td> 0 원</td>
-										 </tr>
-										 <tr>
-										 	<td id="addList" style="border: 1px solid blue;" width="600px;"></td>										 	
-										 </tr>	
-										 <tr>
-										 
-										 	<th>상품 갯수</th>
-										 	<td><input id="qpty" name="pqty" type="number" style="width: 50px; height: 30px;"min="1" max="10" step="1" value="1" /></td>										 	
-										 </tr>										 
-										</tbody>
-									</table>										
-							<div class="row row-pb-sm" style="margin-top:20px;">
-								 <div class="col-md-4">
-                                    <div class="input-group"  > 
-                                    <p ><a href="cart.do" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
-                                 	</div>
-                        		 </div>
-							</div>
-														
-								</div>
-							
-			</div>
-									
-														
-<%-- 					<ul style="list-style-type: none">
-											<li><button type="button" class="btn btn-info" style="margin-right: 10px" onClick="goCart('${pvo.pnum}');">장바구니 담기</button>
-							<button type="button" class="btn btn-warning" style="margin-right: 10px" onClick="goOrder('${pvo.pnum}');">바로주문하기</button>
-						</li>
-					</ul>
-					<input type="hidden" name="pnum" value="${pvo.pnum}" />
-					<input type="hidden" name="saleprice" value="${pvo.saleprice}" />
-					<input type="hidden" name="sumtotalprice" />
-					<input type="hidden" name="sumtotalpoint" />
-					<input type="hidden" name="goBackURL" value="${goBackURL}" />  --%>
-							</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<div class="row">
-							<div class="col-md-12 tabulation">
-								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#description">상세 설명</a></li>
-									<li><a data-toggle="tab" href="#manufacturer">생산자</a></li>
-									<li><a data-toggle="tab" href="#review">리뷰</a></li>
-								</ul>
-								<div class="tab-content"> <!-- 상품 상세 설명 내용  -->
-									<div id="description" class="tab-pane fade in active">
-					
-										<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-										<ul>
-											<li>The Big Oxmox advised her not to do so</li>
-											<li>Because there were thousands of bad Commas</li>
-											<li>Wild Question Marks and devious Semikoli</li>
-											<li>She packed her seven versalia</li>
-											<li>tial into the belt and made herself on the way.</li>
-										</ul>
->>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 						         </div>
 						         <!--  상품 생산자 설명  -->
 						         <div id="manufacturer" class="tab-pane fade">
 						         	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
 										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-								      
+
 								   </div>
 								   <!--  리뷰  -->
 								   <div id="review" class="tab-pane fade">
@@ -512,8 +320,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
  <!--  추천 상품이 들어 갑니다.  -->
 		<div class="colorlib-shop">
 			<div class="container">
@@ -604,16 +412,16 @@
 			</div>
 		</div>
 
-		
 
-	
+
+
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>
-	
 
 
 
 
-<jsp:include page="../footer.jsp"/>
+
+<jsp:include page="../footer.jsp"/> 

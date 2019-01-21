@@ -1,23 +1,2 @@
-/admin/
-/common/
-<<<<<<< HEAD
-/event.zip
-/event/
-/jdbc/
-/login/
-/member/
-/my/
 /product/
-/util/
-=======
 /event/
-/jdbc/
-/login/
-/member/
-/my/
-/product/
-/test/
-/util/
-/최수욱_Event_Index.zip
-/최수욱_Event_Index/
->>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
