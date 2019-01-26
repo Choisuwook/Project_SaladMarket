@@ -17,6 +17,8 @@
 	               $("#addList").append(html);
 		
 		});
+		
+		
 		  
 	});// end of $(document).ready(function()	
 
@@ -129,12 +131,13 @@
 										 </div>
 										 <div>
 										 	<div id="addList" style="border: 1px solid blue;" width="600px;"></div>										 	
-										 </div>	
-										 <div>
-
-										 	<div>상품 갯수</div>
-										 	<div><input id="qpty" name="pqty" type="number" style="width: 50px; height: 30px;"min="1" max="10" step="1" value="1" /></div>										 	
-										 </div>										 
+										 </div>
+										 <c:if test="${pacnum == 1}">	
+											 <div>
+											 	<div>상품 갯수</div>
+											 	<div><input id="qpty" name="pqty" type="number" style="width: 50px; height: 30px;"min="1" max="10" step="1" value="1" /></div>										 	
+											 </div>	
+										 </c:if>									 
 										</div>
 									</div>										
 							<div class="row row-pb-sm" style="margin-top:20px;">
