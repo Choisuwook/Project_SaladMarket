@@ -28,23 +28,16 @@ public class ProductdetailAction extends AbstractController {
 		int pnum = Integer.parseInt(str_pnum);
 		String pacname = req.getParameter("pacname");
 
-		System.out.println(str_pacnum);
-		System.out.println(str_pnum);
-		System.out.println(pacname);
-
-
 		if(pacnum==1) {
 			// 패키지  없는 상품 상세 
 			ProductVO  packageDetail = pdao.getProductNoPackageDetail(Integer.parseInt(str_pacnum) ,Integer.parseInt(str_pnum)); 
 			req.setAttribute("packageDetail", packageDetail);
 		}else {
 			// 패키지가 있는 상품 상세 가져오기 (옵션명)
-			List<ProductVO>  packageDetailList = pdao.getProductDetail(pacname);
-			System.out.println(packageDetailList.size());
-			//ProductVO packageDtail = pdao.getPackageProduct(pacnum);
+			List<ProductVO> packageDetailList = pdao.getProductDetail(pacname);
 			ProductVO packageDetail = pdao.getPackageOne(pacnum);
 			// 대표정보 가져오기
-			
+
 			req.setAttribute("packageDetail", packageDetail);
 			req.setAttribute("packageDetailList", packageDetailList);
 		}

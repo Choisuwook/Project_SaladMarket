@@ -86,7 +86,7 @@
 		               				"</div>"+
 		   		                    "<div class='desc'>"+
 		   		                // " <h3><a href='product-detail.do?pacnum="+entry.pacnum+"&pnum="+entry.pnum+"'>"+entry.pacname+"</a></h3>"+
-		   		              	" <h3><button onClick='goDetail()'>"+entry.pacname+"</button></h3>"+
+		   		              	" <h3><button onClick='goDetail()' style='background:none;border:none;'>"+entry.pacname+"</button></h3>"+
 		   		              	"<input type='text' value='"+entry.pacname+"' />"+
 		   		                 "<p class='price'><span>"+entry.saleprice+"</span></p>"+		   		                 
 		   		                "</div>"+
