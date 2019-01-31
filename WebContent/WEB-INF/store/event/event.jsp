@@ -8,16 +8,16 @@
 	<div class="flexslider">
 		<ul class="slides">
 			<li
-				style="background-image: url(<%= CtxPath %>/store/images/cover-img-1.jpg);">
+				style="background-image: url(<%= CtxPath %>/store/images/PFPI-WEBSITE-SLIDERS-1.png);">
 				<div class="overlay"></div>
 				<div class="container-fluid">
 					<div class="row">
 						<div
 							class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
 							<div class="slider-text-inner text-center">
-								<h1>Event List</h1>
+								<h1>이벤트 목록</h1>
 								<h2 class="bread">
-									<span><a href="index.jsp">Home</a></span>
+									<span><a href="<%= CtxPath %>/index.do">Home</a></span>
 								</h2>
 							</div>
 						</div>

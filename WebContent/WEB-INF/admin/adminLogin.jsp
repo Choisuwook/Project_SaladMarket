@@ -111,55 +111,6 @@ span.psw {
     }
 }
 </style>
-<<<<<<< HEAD
-<script type="text/javascript">
-
-	$(document).ready(function () {
-
-	});
-	
- function goLogin() {
-		var userid=$("#userid").val().trim();
-		var password=$("#password").val().trim();
-
-	if(userid == ""){
-			alert("아이디를 입력하세요 ");
-			$("#userid").focus();
-			return;
-		}
-
-		if(password == ""){
-			alert("비밀번호를 입력하세요 ");
-			$("#password").focus();
-			return;
-		}
-		var frm = document.amdinLoginFrm;
- 		frm.method="POST";
-		frm.action="adminLogin.do";
-		frm.submit(); 
-
-}
-</script>
-
-</head>
-<body>
-<div class="row">
-	<div class="col-md-4"></div>
-	<div class="col-md-4">
-	  <form name="amdinLoginFrm">
-	    <div class="imgcontainer">
-	      <img src="<%=ctxPath %>/img/main_textlogo.png"/>
-	    </div>
-	
-	    <div class="container">
-	      <label for="userid"><b>아이디</b></label>
-	      <input type="text" placeholder="아이디를 입력하세요" id="userid" name="userid" required>
-	
-	      <label for="pwd"><b>비밀번호</b></label>
-	      <input type="password"placeholder="비밀번호를 입력하세요" id="password" name="password" required>
-	        
-	      <button type="button" id="btnLogin" name="btnLogin" class="btn" onClick="goLogin();">Login</button>
-=======
 </head>
 <body>
 <div class="row">
@@ -178,7 +129,6 @@ span.psw {
 	      <input type="password" placeholder="비밀번호를 입력하세요" name="pwd" required>
 	        
 	      <button type="button" class="btn">Login</button>
->>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 	      <label>
 	        <input type="checkbox" checked="checked" name="remember"> 로그인 정보 저장
 	      </label>
