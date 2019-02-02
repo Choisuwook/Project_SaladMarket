@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="admin_header.jsp"/> 
+<style type="text/css">
+.list{
+  text-align: center;
+  vertical-align: center;
+  padding: 3%;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+
+</script>
 
   <div class="row">
           <div class="col-md-3"></div>
@@ -18,9 +32,9 @@
 					     	상품패키지명
 					  </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#">1</a>
-						    <a class="dropdown-item" href="#">2</a>
-						    <a class="dropdown-item" href="#">3</a>
+						  	<c:forEach items="${packageName}" var="name">
+						  		<div class="list" id="package${name.pacnum}">${name.pacname}</div>
+						  		</c:forEach>				
 						  </div>
 					  </div>
                     </div>
@@ -29,10 +43,10 @@
 					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	소분류상세명
 					 	 </button>
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#">1</a>
-						    <a class="dropdown-item" href="#">2</a>
-						    <a class="dropdown-item" href="#">3</a>
+							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						  		<c:forEach items="${subclassTag}" var="name">
+						  		<div class="list" id="package${name.pacnum}" onClick="">${name.pacname}</div>
+						  		</c:forEach>				
 						  </div>
 					  </div>
                     </div>

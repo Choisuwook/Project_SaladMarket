@@ -63,7 +63,6 @@
 		 		if(json.length == 0){
 					html +="현재상품 준비중..";
 					$("#displayResultBEST").html(html);
-					// 더보기 버튼의 비활성화 처리
 			 		$("#btnMoreBEST").attr("disabled", true);
 					$("#btnMoreBEST").css("cursor", "not-allowed") 
 				}else{ 
@@ -89,26 +88,12 @@
 		              			 "</div>"; 	              	
 							});// end of each
 					$("#displayResultBEST").append(html);
-					// >>> (중요!!!!!) 더보기 버튼의 value 속성에 값을 지정하기 <<< 
+							
 					$("#btnMoreBEST").val(parseInt(start) + lenBEST);
-					/*
-					   http://localhost:9090/MyMVC/mallHome.do 을 
-					    처음 띄울때  parseInt(start) 값은 1 이다.
-					    그런 다음에 더보기.. 버튼을 클릭하면 더보기.. 버튼의 value값은
-					    parseInt(start) + lenNEW 이므로 즉, 1+8 이므로 
-					    더보기.. 버튼의 value값은 9 가 된다.
-					*/
-					
+
 					// 웹브라우저상에 count 출력하기 
 				 	$("#countBEST").text(parseInt($("#countBEST").text()) + json.length);    
-					
-					// 더보기.. 버튼을 계속해서 눌러서 countBEST 와  totalBESTCount 가 일치하는 경우 
-					// 버튼의 이름을 "처음으로" 라고 변경하고 countBEST 는 0 으로 초기화 한다.
-				
-			/* 		alert("countBEST : " + $("#countBEST").text() + "\r\n" +
-						  "totalBESTCount : " + $("#totalBESTCount").text() );
-				 */
-					
+
 					if( $("#countBEST").text() == $("#totalBESTCount").text()) {
 						$("#btnMoreBEST").text("처음으로");
 						$("#countBEST").text("0");
@@ -136,7 +121,6 @@
 					if(json.length == 0){
 						html +="현재상품 준비중..";
 						$("#displayResultNEW").html(html);
-						// 더보기 버튼의 비활성화 처리
 				 		$("#btnMoreNEW").attr("disabled", true);
 						$("#btnMoreNEW").css("cursor", "not-allowed") 
 					}else{
@@ -164,11 +148,7 @@
     					});// end of each
     					
 						$("#displayResultNEW").append(html);
-						// >>> (중요!!!!!) 더보기 버튼의 value 속성에 값을 지정하기 <<< 
 						$("#btnMoreNEW").val(parseInt(start) + lenNEW);
-						
-						
-						// 웹브라우저상에 count 출력하기 
 					 	$("#countNEW").text(parseInt($("#countNEW").text()) + json.length);    
 					
 						

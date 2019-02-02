@@ -720,8 +720,7 @@ public class ProductDAO implements InterProductDAO {
 	}
  
 	
-	// *** 패키지가 있는 상품 상세 옵션 가져오는 메소드 ***
-	
+	// *** 패키지가 있는 상품 상세 옵션 가져오는 메소드 ***	
 	public List<ProductVO> getProductDetail(String pacname) throws SQLException{
 
 		List<ProductVO> productDetailList = null;
@@ -1813,6 +1812,42 @@ public class ProductDAO implements InterProductDAO {
 			close();
 		}
 		return productCount;
+	}
+	
+	// *** 패키지 상품명 불러오기 ***
+	@Override
+	public List<ProductVO> getPackageName() throws SQLException {
+		conn=ds.getConnection();
+		
+		 List<ProductVO> packageNameList = null;
+		
+		 try {
+				String sql = " select pacnum,pacname \n"+
+						 	 " from product_package \n"
+						 	 + "order by pacnum asc";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+		
+				int cnt =0;
+				while(rs.next()) {
+					cnt ++;
+					
+					if(cnt ==1) packageNameList = new ArrayList<ProductVO>(); 
+					ProductVO pvo = new ProductVO();
+
+					String pacname = rs.getString("pacname");
+					int pacnum = rs.getInt("pacnum");
+										
+					pvo.setPacname(pacname);
+					pvo.setPacnum(pacnum);
+					
+					packageNameList.add(pvo);
+				}
+		} finally {
+			close();
+		}
+
+		return packageNameList;
 	}
 
 

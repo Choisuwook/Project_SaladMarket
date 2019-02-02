@@ -3,8 +3,7 @@
 <jsp:include page="admin_header.jsp"/> 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-		
+  $(document).ready(function() {		
 
 		$.ajax({
 			url:"a_productJSON.do",
@@ -13,8 +12,8 @@
 			success:function(json){
 				var html ="";
 				$.each(json,function(entryIndex,entry){
-					html ="<tr>"+
-								"<td class='text-center'>"+entry.pname+"</td>"+
+					html ="<tr>"+"<td class='text-center'></td>"+
+								"<td>"+entry.pnum+"</td>"+
 					            "<td>"+entry.pname+"</td>"+			           
 					            "<td>"+entry.saleprice+"</td>"+
 					            "<td>"+entry.pqty+"</td>"+
@@ -64,7 +63,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="text-center">상품번호</th>
+        	<th class="text-center"></th>
+            <th>상품번호</th>
             <th>상품이름</th>
             <th>판매가</th>
             <th>재고량</th>
