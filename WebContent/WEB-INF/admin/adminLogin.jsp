@@ -21,7 +21,7 @@
   <script src="<%= ctxPath %>/assets/js/black-dashboard.min.js?v=1.0.0"></script>
   <script src="<%= ctxPath %>/assets/demo/demo.js"></script>
   
-<style>
+<style type="text/css">
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Full-width input fields */
@@ -111,26 +111,53 @@ span.psw {
     }
 }
 </style>
+<script type="text/javascript">
+	$(document).ready(function () {
+ 		$("#loginBtn").click(function() {
+			adminLogin();
+		}); 
+	});
+	function adminLogin() {		
+		var userid = $("#userid").val().trim();
+		var passwd = $("#pwd").val().trim();
+
+		if(userid == ""){
+				alert("아이디를 입력해 주세요!");
+				$("#userid").val("").focus();
+				return;
+			}
+		if(passwd == ""){
+			 alert("비밀번호를 입력해 주세요!");
+			 $("#pwd").val("").focus();
+			 return
+		}			
+			var frm = document.adminLogin;
+			frm.action="adminLogin.do";
+			frm.method="POST"; 
+			frm.submit();
+	}
+</script>
+
 </head>
 <body>
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-	  <form>
+	  <form name="adminLogin">
 	    <div class="imgcontainer">
 	      <img src="<%=ctxPath %>/img/main_textlogo.png"/>
 	    </div>
-	
+		
 	    <div class="container">
 	      <label for="userid"><b>아이디</b></label>
-	      <input type="text" placeholder="아이디를 입력하세요" name="userid" required>
+	      <input type="text" placeholder="아이디를 입력하세요" id="userid" name="userid" onkeydown="if (event.keyCode == 13) {document.getElementById('pwd').focus();}" required>
 	
 	      <label for="pwd"><b>비밀번호</b></label>
-	      <input type="password" placeholder="비밀번호를 입력하세요" name="pwd" required>
+	      <input type="password" placeholder="비밀번호를 입력하세요" name="pwd" id="pwd" onkeydown="if (event.keyCode == 13) {document.getElementById('loginBtn').click();}"required>
 	        
-	      <button type="button" class="btn">Login</button>
+	      <button type="button" id="loginBtn" class="btn">Login</button>
 	      <label>
-	        <input type="checkbox" checked="checked" name="remember"> 로그인 정보 저장
+	        <input type="checkbox" checked="checked" name="remember">
 	      </label>
 	    </div>
 	
@@ -142,9 +169,6 @@ span.psw {
 	</div>
 	<div class="col-md-4"></div>
 </div>
-<script>
-
-</script>
 
 </body>
 </html>

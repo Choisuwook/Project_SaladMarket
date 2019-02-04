@@ -23,6 +23,7 @@ public class A_ProductRegisterAction extends AbstractController {
 	
 		//소분류상세
 		List<ProductVO> subclassTag = dao.sdnameList();
+				
 		//카테고리테그
 		List<ProductVO> categoryTag = dao.ctnameList();
 		//스펙테그

@@ -1595,8 +1595,8 @@ public class ProductDAO implements InterProductDAO {
 
 				ProductVO pvo = new ProductVO();
 
-		 		pvo.setFk_etname(stname);
-		 		pvo.setEtnum(stnum);
+		 		pvo.setFk_stname(stname);
+		 		pvo.setStnum(stnum);
 
 
 				stnameList.add(pvo);
@@ -1614,9 +1614,9 @@ public class ProductDAO implements InterProductDAO {
 
 		List<ProductVO> sdnameList = null;		
 		try {	
-			String sql = " select sdnum,sdname\n"+
-						"from small_detail\n"+
-						"order by sdnum";
+			String sql = " select sdnum,sdname \n"+
+						" from small_detail \n"+
+						" order by sdnum ";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -1633,9 +1633,9 @@ public class ProductDAO implements InterProductDAO {
 
 		 		pvo.setFk_sdname(sdname);
 		 		pvo.setSdnum(sdnum);
-
-
-				sdnameList.add(pvo);
+		 		
+		 		System.out.println(sdname);
+		 		sdnameList.add(pvo);
 			}
 		}finally {
 			close();

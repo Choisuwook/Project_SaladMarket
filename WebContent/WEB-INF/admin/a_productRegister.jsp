@@ -14,6 +14,14 @@
 </style>
 <script type="text/javascript">
 
+function packageName(event) {
+	$("#package"+event).parent().parent().show();
+	var selectPackage= $("#package"+event).val();
+		
+	$("#dropdownMenuButton1").text("").text(selectPackage);
+	$("#package"+event).parent().parent().html("<a href='self.close()'></a>"); 
+
+}
 </script>
 
   <div class="row">
@@ -28,61 +36,63 @@
                   <div class="row">
                     <div class="col-md-3 pr-md-1">
                       <div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	상품패키지명
 					  </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  	<c:forEach items="${packageName}" var="name">
-						  		<div class="list" id="package${name.pacnum}">${name.pacname}</div>
-						  		</c:forEach>				
+						  		<div class="list" aria-labelledby="dropdownMenuButton" style="border:1px solid red; width:300px;">
+						  			<input type="text" value="${name.pacname}" id="package${name.pacnum}" onClick="packageName(${name.pacnum});" size="15" style="width:100%;border:none; cursor: pointer;"/>
+						  		</div>
+						  	</c:forEach>				
 						  </div>
 					  </div>
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	소분류상세명
 					 	 </button>
 							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  		<c:forEach items="${subclassTag}" var="name">
-						  		<div class="list" id="package${name.pacnum}" onClick="">${name.pacname}</div>
+						  			<div class="list" id="package${name.sdnum}" onClick="">${name.fk_sdname}</div>
 						  		</c:forEach>				
 						  </div>
 					  </div>
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	카테고리태그명
 					 	 </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#">1</a>
-						    <a class="dropdown-item" href="#">2</a>
-						    <a class="dropdown-item" href="#">3</a>
+						     	<c:forEach items="${categoryTag}" var="name">
+						  			<div class="list" id="package${name.ctnum}" onClick="">${name.ctname}</div>
+						  		</c:forEach>
 						  </div>
 					  </div>
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	스펙태그명
 					 	 </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#">1</a>
-						    <a class="dropdown-item" href="#">2</a>
-						    <a class="dropdown-item" href="#">3</a>
+								<c:forEach items="${specTag}" var="name">
+						  			<div class="list" id="package${name.stnum}" onClick="">${name.fk_stname}</div>
+						  		</c:forEach>
 						  </div>
 					  </div>
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	이벤트태그명
 					 	 </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#">1</a>
-						    <a class="dropdown-item" href="#">2</a>
-						    <a class="dropdown-item" href="#">3</a>
+						  	  <c:forEach items="${eventTag}" var="name">
+						  		 <div class="list"><input type="button" id="event${name.etnum}" value="${name.fk_etname}" onclick="event(${name.etnum});" /></div>
+						  	  </c:forEach>
 						  </div>
 					  </div>
                     </div>

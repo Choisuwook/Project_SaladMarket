@@ -15,6 +15,7 @@ public class AdminLoginAction extends AbstractController {
 		InterAdminDAO adao = new AdminDAO();
 		String msg = "";
 		String loc = "";
+		System.out.println("ㅎㅎㅎ");
 		if(!"POST".equals("method")) {
 			msg = "비정상적인 경로입니다!";
 			loc = "javascript:history.back();";
@@ -50,7 +51,7 @@ public class AdminLoginAction extends AbstractController {
 			}			
 		}		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/admin/adminLogin.jsp");
+		super.setViewPage("/WEB-INF/admin/admin_index.jsp");
 
 	}
 
