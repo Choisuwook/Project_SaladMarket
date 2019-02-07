@@ -1634,7 +1634,7 @@ public class ProductDAO implements InterProductDAO {
 		 		pvo.setFk_sdname(sdname);
 		 		pvo.setSdnum(sdnum);
 		 		
-		 		System.out.println(sdname);
+		 		
 		 		sdnameList.add(pvo);
 			}
 		}finally {
@@ -1848,6 +1848,96 @@ public class ProductDAO implements InterProductDAO {
 		}
 
 		return packageNameList;
+	}
+	@Override
+	public int getNextPnum() throws SQLException {
+		conn=ds.getConnection();
+		int pnum = 0;
+		 try {
+				String sql = " select seq_product_pnum.nextval AS pnum"+
+							 " from dual ";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();				
+				rs.next();
+				pnum = rs.getInt("pnum");
+				
+		 }finally {
+			close();
+		}
+		return pnum;
+	}
+	
+	// *** 상품 등록시 이미지 파일 업로드 ***
+	@Override
+	public int product_imagefile_Insert(int pnum, String attachFilename) throws SQLException {
+		conn=ds.getConnection();
+		int n = 0;
+		conn.setAutoCommit(false);
+		 try {
+				String sql = " insert into PRODUCT_IMAGES (pimgnum,pimgfilename,fk_pnum)\n" + 
+							 " values(SEQ_PRODUCT_IMAGES_PIMGNUM.nextval,?,?)";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, attachFilename);
+				pstmt.setInt(2, pnum);
+				n = pstmt.executeUpdate();
+				
+				if(n ==1) {
+					conn.commit();
+					System.out.println("제품등록 성공!");
+					n=1;
+				}else {
+					conn.rollback();
+					System.out.println("제품등록 실패!");
+					n=0;
+				}
+				
+		 }finally {
+			close();
+		}
+		return n;
+
+	}
+
+	// *** 상품상세 등록 ***
+	@Override
+	public int adminProductInsert(ProductVO pvo) throws SQLException {
+		conn = ds.getConnection();
+		int n = 0;
+		conn.setAutoCommit(false);
+		try {
+			String sql = " insert into product(pnum, fk_pacname, fk_sdname, fk_ctname, fk_stname, fk_etname, pname,price, saleprice, point, pqty, pcontents, pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate)"+
+						 " values(seq_product_pnum.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,default,default,default,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pvo.getPacname());
+			pstmt.setString(2,pvo.getSdname());
+			pstmt.setString(3, pvo.getCtname());
+			pstmt.setString(4, pvo.getStname());
+			pstmt.setString(5, pvo.getEtname());
+			pstmt.setString(6, pvo.getPname());
+			pstmt.setInt(7, pvo.getPrice());
+			pstmt.setInt(8,pvo.getSaleprice());
+			pstmt.setInt(9, (int)((0.01)*pvo.getSaleprice()));
+			pstmt.setInt(10, pvo.getPqty());
+			pstmt.setString(11, pvo.getPcontents());
+			pstmt.setString(12, pvo.getPexpiredate());
+			pstmt.setString(13, pvo.getAllergy());
+			
+			n = pstmt.executeUpdate();
+		
+		if(n==1) {
+			conn.commit();
+			n =1;
+			System.out.println("제품등록 성공!");
+		}else {
+			conn.rollback();
+			n=0;
+			System.out.println("제품등록 실패!");
+		}
+		} finally {
+			close();
+		}
+		return n;
 	}
 
 

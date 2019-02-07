@@ -33,7 +33,7 @@ $(document).ready(function () {
 		var html = $(this).html();
 		
 		var sdname = $(this).attr('id');
-		console.log(sdname);
+		console.log("sdname"+sdname);
 		$("#sdname").val(sdname);
 		
 		if(len>8){
@@ -80,12 +80,9 @@ $(document).ready(function () {
 		
 	});
 	
-	$("#spinnerImgQty").bind("spinstop", function(){
-		
+	$("#spinnerImgQty").click("spinstop", function(){
 		var html ="";
 		var spinnerImgQtyVal = $("#spinnerImgQty").val();
-		
-		alert(html);
 		
 		if(spinnerImgQtyVal == "0"){
 			$("#divfileattach").empty();
@@ -107,7 +104,35 @@ $(document).ready(function () {
 	
 });
 
+ function goRegister() {
+	 
+	var flag =false;
+	$(".infoData").each(function () {		
+		var value = $(this).val();
+		if(value == ""){
+			$(this).next().html("<br/>해당값을 입력하세요!");
+			flag=true;
+			return;
+		}else{
+			flag=false;
+			$(this).next().html("");
+		}
+
+	});
+	if(flag){
+		event.preventDefault(); // 이벤트를 가로막는다(아래 form에 기재되어 있는 action을 취하지 않음)
+		return;
+	}else{			 
+		var frm = document.registerFrm;
+		frm.method="POST";
+		frm.action="goRegister.do";
+		frm.submit();
+	}
+
+
 }
+
+
 </script>
 
   <div class="row">
@@ -125,7 +150,7 @@ $(document).ready(function () {
 			  		  <button class="btn btn-primary dropdown-toggle" type="button" id="btnPacnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	상품패키지명
 					  </button>
-					  <input type="hidden" class="infoData" name="pacname" id="pacname" value=""><span></span>
+					  <input type="hidden" class="infoData" name="pacname" id="pacname"><span></span>
 						  <div class="dropdown-menu" id="fk_pacnameSelect" aria-labelledby="btnPacnameSelect">
 							<c:forEach var="map" items="${packageName}">
 		   						<a class="dropdown-item" id="${map.pacnum}">${map.pacname}</a>
@@ -139,7 +164,7 @@ $(document).ready(function () {
 						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnSdnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	소분류상세명
 					 	 </button>
-					 	 <input type="hidden" class="infoData" name="sdname" id="sdname" value=""><span></span>
+					 	 <input type="hidden" class="infoData" name="sdname" id="sdname"><span></span>
 						  <div class="dropdown-menu" id="fk_sdnameSelect" aria-labelledby="btnSdnameSelect">
 						    <c:forEach var="map" items="${requestScope.subclassTag}">
 		   						<a class="dropdown-item" id="${map.sdname}">${map.fk_sdname}</a>
@@ -153,11 +178,10 @@ $(document).ready(function () {
 						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnCtnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	카테고리태그명
 					 	 </button>
-					 	 <input type="hidden" class="infoData" name="ctname" id="ctname" value=""><span></span>
+					 	 <input type="hidden" class="infoData" name="ctname" id="ctname"><span></span>
 						  <div class="dropdown-menu" id="fk_ctnameSelect" aria-labelledby="btnCtnameSelect">
 						    <c:forEach var="map" items="${categoryTag}">
-		   						<a class="dropdown-item" id="${map.ctnum}">${map.ctname}</a>
-		   						
+		   						<a class="dropdown-item" id="${map.ctnum}">${map.ctname}</a>		   						
 	    					</c:forEach>
 						  </div>
 						  
@@ -165,10 +189,10 @@ $(document).ready(function () {
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnStnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnStnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	스펙태그명
 					 	 </button>
-					 	 <input type="hidden" class="infoData" name="stname" id="stname" value=""><span></span>
+					 	 <input type="hidden" class="infoData" name="stname" id="stname"><span></span>
 						  <div class="dropdown-menu" id="fk_stnameSelect" aria-labelledby="btnStnameSelect">
 						    <c:forEach var="map" items="${specTag}">
 		   						<a class="dropdown-item" id="${map.stnum}">${map.fk_stname}</a>
@@ -179,7 +203,7 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnSt
                     </div>
                     <div class="col-md-3 pr-md-1">
                         <div class="dropdown">
-W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEtnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEtnameSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					     	이벤트태그명
 					 	 </button>
 					 	 <input type="hidden" class="infoData" name="etname" id="etname" value=""><span></span>
@@ -193,7 +217,7 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEt
                     <div class="col-md-12 pl-md-8">
                       <div class="form-group">
                         <label>상품명</label>
-                        <input type="text" class="form-control pname infoData" name="panme" id="pname" >
+                        <input type="text" class="infoData form-control pname" name="panme" id="pname" >
                       </div>
                     </div>
                   </div>
@@ -201,25 +225,25 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEt
                     <div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>원가</label>
-                        <input type="text" class="form-control price infoData" name="price" id="price">
+                        <input type="text" class="infoData form-control price" name="price" id="price"><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pl-md-1">
                       <div class="form-group">
                         <label>판매가</label>
-                        <input type="text" class="form-control saleprice infoData" name="saleprice" id="saleprice" >
+                        <input type="text" class="infoData form-control saleprice" name="saleprice" id="saleprice" ><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pl-md-1">
                       <div class="form-group">
                         <label>포인트</label>
-                        <input type="text" class="form-control point infoData" name="point" id="point" >
+                        <input type="text" class="infoData form-control point" name="point" id="point" ><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pl-md-1">
                       <div class="form-group">
                         <label>재고량</label>
-                        <input type="text" class="form-control pqty infoData" name="pqty" id="pqty" >
+                        <input type="text" class="infoData form-control pqty" name="pqty" id="pqty" ><span></span>
                       </div>
                     </div>
                   </div>
@@ -228,7 +252,7 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEt
                     <div class="col-md-8 pl-md-3">
                       <div class="form-group">
                         <label>상품설명</label>
-                        <textarea rows="4" cols="80" class="form-control pcontents infoData" name="pcontents" id="pcontents" placeholder="설명을 입력하세요"></textarea>
+                        <textarea rows="4" cols="80" class="infoData form-control pcontents" name="pcontents" id="pcontents" placeholder="설명을 입력하세요"></textarea><span></span>
                       </div>
                     </div>
                   </div>
@@ -237,31 +261,31 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEt
                   	<div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>상품회사명</label>
-                        <input type="text" class="form-control pcompanyname infoData" name="pcompanyname" id="pcompanyname">
+                        <input type="text" class="infoData form-control pcompanyname" name="pcompanyname" id="pcompanyname"><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>유통기한</label>
-                        <input type="text" class="form-control pexpiredate infoData" name="pexpiredate" id="pexpiredate">
+                        <input type="text" class="infoData form-control pexpiredate" name="pexpiredate" id="pexpiredate"><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>알레르기정보</label>
-                        <input type="text" class="form-control allergy infoData" name="allergy" id="allergy">
+                        <input type="text" class="infoData form-control allergy" name="allergy" id="allergy"><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>용량</label>
-                        <input type="text" class="form-control weight infoData" name="weight" id="weight">
+                        <input type="text" class="infoData form-control weight" name="weight" id="weight"><span></span>
                       </div>
                     </div>
                     <div class="col-md-2 pr-md-1">
                       <div class="form-group">
                         <label>상품회사명</label>
-                        <input type="text" class="form-control pcompanyname infoData" name="pcompanyname" id="pcompanyname">
+                        <input type="text" class="infoData form-control pcompanyname" name="pcompanyname" id="pcompanyn<span></span>ame">
                       </div>
                     </div>
                    </div>
@@ -270,19 +294,19 @@ W						  <button class="btn btn-primary dropdown-toggle" type="button" id="btnEt
 	              <label for="spinnerImgQty">파일 갯수 : </label>
 		              <ul style="list-style-type: none;">
 		              	<li>
-		              	 <input id="spinnerImgQty" type="number" value="0" style="width: 10%; height: 20px;">
+		              	 <input id="spinnerImgQty" name ="spinnerImgQty" type="number" value="0" style="width: 10%; height: 20px;">
 		              	</li>
-		              	<li>
-		              		<div id="divfileattach"></div>		                  
+		              	<li>                  
 		                </li>
-		                <li><input type="hidden" name="attachCount" id="attachCount" />
+		                <li><input type="text" name="attachCount" id="attachCount" value=""/>
 		              	</li>
 		              </ul>
+		              <div id="divfileattach"></div>
                 </form>
               </div>
               
               <div class="card-footer">
-                <button type="button" class="btn btn-fill btn-primary">등록</button>
+                <button type="button" class="btn btn-fill btn-primary" onClick="goRegister();">등록</button>
               </div>
             </div>
           </div>

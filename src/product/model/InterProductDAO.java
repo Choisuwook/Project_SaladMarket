@@ -89,5 +89,11 @@ public interface InterProductDAO {
 	ProductVO getPackageOne(int pacnum) throws SQLException;
 	// ***패키지 상품 명 불러오기 ***
 	List<ProductVO> getPackageName() throws SQLException ;
+	// *** 다음 상품 번호 ***
+	int getNextPnum() throws SQLException;
+	// *** 상품등록시 이미지 파일 업로드 ***
+	int product_imagefile_Insert(int pnum, String attachFilename) throws SQLException;
+	// *** 상품상세 등록 ***
+	int adminProductInsert(ProductVO pvo) throws SQLException;
 	
 }

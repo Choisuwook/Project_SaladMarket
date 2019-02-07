@@ -9,8 +9,8 @@ DEFAULT tablespace users;
 
 GRANT CONNECT, resource, unlimited tablespace, CREATE VIEW TO saladmarket;
 
-
- select mnum, userid, name, email, phone, postnum, address1, address2, point,birthday 
+------------------------------------------------------
+select mnum, userid, name, email, phone, postnum, address1, address2, point,birthday 
 					 ,to_char(registerdate, 'yyyy-mm-dd') AS last_logindate 
 					 ,to_char(registerdate, 'yyyy-mm-dd') AS  last_changepwdate 
 		             ,to_char(registerdate, 'yyyy-mm-dd') as registerdate 
@@ -457,6 +457,14 @@ create table product
 ,constraint FK_product_etname foreign key(fk_etname)
                                references event_tag(etname)
 );
+
+
+SELECT * FROM all_objects
+
+WHERE object_type = 'SEQUENCE';
+
+
+select SEQ_PRODUCT_IMAGES_PIMGNUM.nextval from dual;
 
 
 
