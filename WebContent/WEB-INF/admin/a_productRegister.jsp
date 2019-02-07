@@ -7,7 +7,7 @@
   text-align: center;
   vertical-align: center;
   padding: 3%;
-  width: 100%;
+  width: 100%; 
   border-bottom: 1px solid lightgray;
   cursor: pointer;
 }
