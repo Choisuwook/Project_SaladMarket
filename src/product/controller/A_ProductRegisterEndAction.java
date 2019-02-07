@@ -18,67 +18,85 @@ public class A_ProductRegisterEndAction extends AbstractController{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		InterProductDAO pdao = new ProductDAO();
-		
-		String pacname =req.getParameter("pacname");
-		String sdname = req.getParameter("sdname");
-		String ctname = req.getParameter("ctname");
-		String stname = req.getParameter("stname");
-		String etname = req.getParameter("etname");
-		String pname = req.getParameter("pname");
-		String point = req.getParameter("point");
-		String pqty = req.getParameter("pqty");
-		String pcontents =req.getParameter("pcontents");
-		String pcompanyname =req.getParameter("pcompanyname");
-		String pexpiredate = req.getParameter("pexpiredate");
-		String allergy = req.getParameter("allergy");
-		String weight = req.getParameter("weight");
-		String attachCount = req.getParameter("attachCount");
-
-		System.out.println(attachCount);
-		System.out.println(weight);
 		HttpSession session = req.getSession();
 		ServletContext sclCtx = session.getServletContext();
 		String imagesDir = sclCtx.getRealPath("/img/productImg");
-				
-		System.out.println("이미지 경로"+imagesDir);
 		
-		MultipartRequest mtreq = null;
+		MultipartRequest mtreq = null;	
+		
 		mtreq = new MultipartRequest(req, imagesDir, 10*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
-				
+						
+		String pacname =mtreq.getParameter("pacname");
+		String sdname = mtreq.getParameter("sdname");
+		String ctname = mtreq.getParameter("ctname");
+		String stname = mtreq.getParameter("stname");
+		String etname = mtreq.getParameter("etname");
+		String pname = mtreq.getParameter("pname");
+		String str_point = mtreq.getParameter("point");
+		String str_pqty = mtreq.getParameter("pqty");
+		String pcontents =mtreq.getParameter("pcontents");
+		String pcompanyname =mtreq.getParameter("pcompanyname");
+		String pexpiredate = mtreq.getParameter("pexpiredate");
+		String allergy = mtreq.getParameter("allergy");
+		String str_saleprice = mtreq.getParameter("saleprice");
+		String str_price = mtreq.getParameter("price");
+		String str_weight = mtreq.getParameter("weight");
+		String attachCount = mtreq.getParameter("attachCount");
+	
 		int m =1;
+		int point = Integer.parseInt(str_point);
+		int pqty = Integer.parseInt(str_pqty);
+		int saleprice = Integer.parseInt(str_saleprice);
+		int price = Integer.parseInt(str_price);
+		int weight = Integer.parseInt(str_weight);
+		
 		int pnum = pdao.getNextPnum();
+		
+		ProductVO pvo = new ProductVO();
+		pvo.setPnum(pnum);
+		pvo.setPacname(pacname);
+		pvo.setSdname(sdname);
+		pvo.setStname(stname);
+		pvo.setCtname(ctname);
+		pvo.setEtname(etname);
+		pvo.setPname(pname);
+		pvo.setSaleprice(saleprice);
+		pvo.setPrice(price);
+		pvo.setPoint(point);
+		pvo.setPqty(pqty);
+		pvo.setPcontents(pcontents);
+		pvo.setPcompanyname(pcompanyname);
+		pvo.setPexpiredate(pexpiredate);
+		pvo.setAllergy(allergy);
+		pvo.setWeight(weight);
+		int n=0;
+		
+		n = pdao.adminProductInsert(pvo);
 		for(int i=0;i<Integer.parseInt(attachCount);i++) {
 			String attachFilename = mtreq.getFilesystemName("attach"+i);
 			m = pdao.product_imagefile_Insert(pnum, attachFilename);
 			
 			if(m == 0) break;
-		}
-		ProductVO pvo = new ProductVO();
-		pvo.setPacname(pacname);
-		pvo.setSdname(sdname);
-		pvo.setCtname(ctname);
-		pvo.setEtname(etname);
-		pvo.setPname(pname);
-		pvo.setPoint(Integer.parseInt(point));
-		pvo.setPqty(Integer.parseInt(pqty));
-		pvo.setPcontents(pcontents);
-		pvo.setPcompanyname(pcompanyname);
-		pvo.setPexpiredate(pexpiredate);
-		pvo.setAllergy(allergy);
-		pvo.setWeight(Integer.parseInt(weight));
+		}	
 		
-		int n=0;
-		
-		n = pdao.adminProductInsert(pvo);
 		String msg="";
 		String loc="";
 		if(n*m ==1) {
 			msg= "제품등록 최종 성공!";
-			loc=req.getContextPath()+"/admin_index.do";			
+			loc=req.getContextPath()+"/admin_index.do";	
+			req.setAttribute("msg", msg);
+			req.setAttribute("loc", loc);
+			
 		}else {
 			msg="제품등록 최종 실패!";
 			loc = req.getContextPath()+"/admin_index.do";		
+			req.setAttribute("msg", msg);
+			req.setAttribute("loc", loc);
 		}
+		super.setRedirect(false);
+		super.setViewPage("/WEB-INF/msg.jsp");
 	}
+
+	
 
 }

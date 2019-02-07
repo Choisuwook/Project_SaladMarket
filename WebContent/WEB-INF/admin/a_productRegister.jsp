@@ -15,7 +15,7 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	
-	$("#fk_pacnameSelect").children().click(function(){
+	$("#fk_pacnameSelect1").children().click(function(){
 		var len = $(this).html().length;
 		var html = $(this).text().trim();
 		console.log(html);
@@ -28,13 +28,11 @@ $(document).ready(function () {
 
 	});
 	
-	$("#fk_sdnameSelect").children().click(function(){
+	$("#fk_sdnameSelect2").children().click(function(){
 		var len = $(this).html().length;
-		var html = $(this).html();
-		
-		var sdname = $(this).attr('id');
-		console.log("sdname"+sdname);
-		$("#sdname").val(sdname);
+		var html = $(this).text();
+
+		$("#sdname").val(html);
 		
 		if(len>8){
 			html = html.substring(0,13);
@@ -44,7 +42,7 @@ $(document).ready(function () {
 		
 	});
 	
-	$("#fk_ctnameSelect").children().click(function(){
+	$("#fk_ctnameSelect3").children().click(function(){
 		var len = $(this).html().length;
 		var html = $(this).text();
 		console.log(html);
@@ -56,7 +54,7 @@ $(document).ready(function () {
 		
 	});
 	
-	$("#fk_stnameSelect").children().click(function(){
+	$("#fk_stnameSelect4").children().click(function(){
 		var len = $(this).html().length;
 		var html = $(this).text();
 		console.log(html);
@@ -68,7 +66,7 @@ $(document).ready(function () {
 		
 	});
 	
-	$("#fk_etnameSelect").children().click(function(){
+	$("#fk_etnameSelect5").children().click(function(){
 		var len = $(this).html().length;
 		var html = $(this).text();
 		console.log(html);
@@ -79,7 +77,7 @@ $(document).ready(function () {
 		$("#btnEtnameSelect").empty().html(html);
 		
 	});
-	
+
 	$("#spinnerImgQty").click("spinstop", function(){
 		var html ="";
 		var spinnerImgQtyVal = $("#spinnerImgQty").val();
@@ -151,7 +149,7 @@ $(document).ready(function () {
 					     	상품패키지명
 					  </button>
 					  <input type="hidden" class="infoData" name="pacname" id="pacname"><span></span>
-						  <div class="dropdown-menu" id="fk_pacnameSelect" aria-labelledby="btnPacnameSelect">
+						  <div class="dropdown-menu" id="fk_pacnameSelect1" aria-labelledby="btnPacnameSelect">
 							<c:forEach var="map" items="${packageName}">
 		   						<a class="dropdown-item" id="${map.pacnum}">${map.pacname}</a>
 		   						
@@ -165,7 +163,7 @@ $(document).ready(function () {
 					     	소분류상세명
 					 	 </button>
 					 	 <input type="hidden" class="infoData" name="sdname" id="sdname"><span></span>
-						  <div class="dropdown-menu" id="fk_sdnameSelect" aria-labelledby="btnSdnameSelect">
+						  <div class="dropdown-menu" id="fk_sdnameSelect2" aria-labelledby="btnSdnameSelect">
 						    <c:forEach var="map" items="${requestScope.subclassTag}">
 		   						<a class="dropdown-item" id="${map.sdname}">${map.fk_sdname}</a>
 	    					</c:forEach>
@@ -179,7 +177,7 @@ $(document).ready(function () {
 					     	카테고리태그명
 					 	 </button>
 					 	 <input type="hidden" class="infoData" name="ctname" id="ctname"><span></span>
-						  <div class="dropdown-menu" id="fk_ctnameSelect" aria-labelledby="btnCtnameSelect">
+						  <div class="dropdown-menu" id="fk_ctnameSelect3" aria-labelledby="btnCtnameSelect">
 						    <c:forEach var="map" items="${categoryTag}">
 		   						<a class="dropdown-item" id="${map.ctnum}">${map.ctname}</a>		   						
 	    					</c:forEach>
@@ -193,7 +191,7 @@ $(document).ready(function () {
 					     	스펙태그명
 					 	 </button>
 					 	 <input type="hidden" class="infoData" name="stname" id="stname"><span></span>
-						  <div class="dropdown-menu" id="fk_stnameSelect" aria-labelledby="btnStnameSelect">
+						  <div class="dropdown-menu" id="fk_stnameSelect4" aria-labelledby="btnStnameSelect">
 						    <c:forEach var="map" items="${specTag}">
 		   						<a class="dropdown-item" id="${map.stnum}">${map.fk_stname}</a>
 		   						
@@ -207,7 +205,7 @@ $(document).ready(function () {
 					     	이벤트태그명
 					 	 </button>
 					 	 <input type="hidden" class="infoData" name="etname" id="etname" value=""><span></span>
-						  <div class="dropdown-menu" id="fk_etnameSelect" aria-labelledby="btnEtnameSelect">
+						  <div class="dropdown-menu" id="fk_etnameSelect5" aria-labelledby="btnEtnameSelect">
 						    <c:forEach var="map" items="${eventTag}">
 		   						<a class="dropdown-item" id="${map.etnum}">${map.fk_etname}</a>
 	    					</c:forEach>
@@ -217,7 +215,7 @@ $(document).ready(function () {
                     <div class="col-md-12 pl-md-8">
                       <div class="form-group">
                         <label>상품명</label>
-                        <input type="text" class="infoData form-control pname" name="panme" id="pname" >
+                        <input type="text" class="infoData form-control pname" name="pname" id="pname" >
                       </div>
                     </div>
                   </div>
@@ -294,11 +292,11 @@ $(document).ready(function () {
 	              <label for="spinnerImgQty">파일 갯수 : </label>
 		              <ul style="list-style-type: none;">
 		              	<li>
-		              	 <input id="spinnerImgQty" name ="spinnerImgQty" type="number" value="0" style="width: 10%; height: 20px;">
+		              	 <input id="spinnerImgQty" name ="spinnerImgQty" type="number" value="0" min="0" style="width: 10%; height: 20px;">
 		              	</li>
 		              	<li>                  
 		                </li>
-		                <li><input type="text" name="attachCount" id="attachCount" value=""/>
+		                <li><input type="hidden" name="attachCount" id="attachCount" value=""/>
 		              	</li>
 		              </ul>
 		              <div id="divfileattach"></div>

@@ -41,6 +41,7 @@
 	
 	
  	function goDetail(event) {		
+		alert(event);
 		var frm = document.productFrm;
 		frm.method = "POST";
 		frm.action = "a_productDetail.do?pnum="+event;
@@ -74,8 +75,9 @@
     <tbody id="productList">
     <tr>
     </tr>
-    </tbody>
+    </tbody>   
 </table>
+<span>{pageBar}</span>
 </form>
 <jsp:include page="admin_footer.jsp"/> 
 

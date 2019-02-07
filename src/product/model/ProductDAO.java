@@ -1906,8 +1906,10 @@ public class ProductDAO implements InterProductDAO {
 		int n = 0;
 		conn.setAutoCommit(false);
 		try {
-			String sql = " insert into product(pnum, fk_pacname, fk_sdname, fk_ctname, fk_stname, fk_etname, pname,price, saleprice, point, pqty, pcontents, pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate)"+
-						 " values(seq_product_pnum.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,default,default,default,sysdate)";
+			String sql = " insert into product(fk_pacname, fk_sdname, fk_ctname, fk_stname, fk_etname, pname,price, "
+					+ "saleprice, point, pqty, "
+					+ "pcontents, pcompanyname, pexpiredate, allergy, weight, salecount, plike, pdate,pnum)"+
+					 " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default,default,sysdate,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pvo.getPacname());
 			pstmt.setString(2,pvo.getSdname());
@@ -1917,12 +1919,14 @@ public class ProductDAO implements InterProductDAO {
 			pstmt.setString(6, pvo.getPname());
 			pstmt.setInt(7, pvo.getPrice());
 			pstmt.setInt(8,pvo.getSaleprice());
-			pstmt.setInt(9, (int)((0.01)*pvo.getSaleprice()));
+			pstmt.setInt(9, pvo.getPoint());
 			pstmt.setInt(10, pvo.getPqty());
 			pstmt.setString(11, pvo.getPcontents());
-			pstmt.setString(12, pvo.getPexpiredate());
-			pstmt.setString(13, pvo.getAllergy());
-			
+			pstmt.setString(12, pvo.getPcompanyname());
+			pstmt.setString(13, pvo.getPexpiredate());
+			pstmt.setString(14, pvo.getAllergy());
+			pstmt.setInt(15, pvo.getWeight());
+			pstmt.setInt(16, pvo.getPnum());
 			n = pstmt.executeUpdate();
 		
 		if(n==1) {
