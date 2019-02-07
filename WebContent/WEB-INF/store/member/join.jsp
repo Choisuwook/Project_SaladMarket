@@ -235,7 +235,10 @@ function goRegister(event) {
                   <input type="text" id="userid" name="userid" class="form-control requiredinfo" placeholder="ID">   
                   <span class="error_idCheck" style="color: blue; font-size: 12px;">아이디 확인 버튼을 누르세요.</span>             
                </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Choisuwook/Project_SaladMarket.git
                <div class="col-md-2" style="margin-top:8.5%">
                   <button type="button" class="btn" style="width: 80px; height: 20px; padding: 0%;"><span style="font-size: 2px;" id="idCheck" >아이디 확인</span></button>
                   <br/><span id="error" style="color: red; font-weight: bold;"></span>

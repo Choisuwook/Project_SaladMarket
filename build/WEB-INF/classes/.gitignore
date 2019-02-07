@@ -1,4 +1,6 @@
+/member/
 /product/
+<<<<<<< HEAD
 /event/
 /admin/
 /common/
@@ -9,3 +11,6 @@
 /test/
 /util/
 /event.zip
+=======
+/admin/
+>>>>>>> branch 'master' of https://github.com/Choisuwook/Project_SaladMarket.git

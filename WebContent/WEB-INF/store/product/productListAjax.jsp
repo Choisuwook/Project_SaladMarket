@@ -86,8 +86,8 @@
 		               				"</div>"+
 		   		                    "<div class='desc'>"+
 		   		                // " <h3><a href='product-detail.do?pacnum="+entry.pacnum+"&pnum="+entry.pnum+"'>"+entry.pacname+"</a></h3>"+
-		   		              	" <h3><button onClick='goDetail()'>"+entry.pacname+"</button></h3>"+
-		   		              	"<input type='text' value='"+entry.pacname+"' />"+
+		   		              	" <h3><button onClick='goDetail()' style='background:none;border:none;'>"+entry.pacname+"</button></h3>"+
+		   		              	"<input type='hidden' value='"+entry.pacname+"' />"+
 		   		                 "<p class='price'><span>"+entry.saleprice+"</span></p>"+		   		                 
 		   		                "</div>"+
 		             			"</div>"+		             			
@@ -165,7 +165,7 @@
 		               "</div>"+
 		               "<div class='desc'>"+
 		                  //" <h3><a href='product-detail.do?pacnum="+entry.pacnum+"&pnum="+entry.pnum+"'>"+entry.pacname+"</a></h3>"+
-		                 " <h3><button onClick='goDetail()'>"+entry.pacname+"</button></h3>"+		  
+		                 " <h3><button onClick='goDetail()' style='border:none; background-color:white;'>"+entry.pacname+"</button></h3>"+		  
 		                 " <p class='price'><span class='sale'>"+entry.price+"원</span><br/>"+
 		                 " <span>"+entry.saleprice+"원</span></p>"+
 		                 "<input type='hidden' name='pacname' value='"+entry.pacname+"'/>"+

@@ -62,7 +62,7 @@
 	});
 	
 </script>
-<div class="container">      
+<div class="container"  style="text-align: center; vertical-align: center;">      
    <div class="col-md-12">
    	<div>
 	    <form method="post"  name="pwdChangeFrm"  class="colorlib-form">    
@@ -72,22 +72,21 @@
 		             <label for="password">비밀번호</label>
 		          </div>
 		          <div class="col-md-3">
-		              <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+		              <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호">
 		          </div>
 		       </div>
-				<input type="text" name="userid" value="${userid}" />
-		       <div class="form-group" style="margin-bottom: 3%;">
+				<input type="hidden" name="userid" value="${userid}" />
+		       <div class="form-group" style="margin-bottom: 3%; border:1px solid red;">
 			       <div class="col-md-3" style="margin-top: 3%;"></div> <%-- 이부분은 칸 조정할려고 넣어놨어요ㅠㅠ --%>
 			       <div class="col-md-2" style="margin-top: 3%;" align="right">
 			           <label for="password">비밀번호 확인</label>
 			       </div>
 			       <div class="col-md-3">
-			           <input type="password" id="pwdcheck" class="form-control" placeholder=Password>
+			           <input type="password" id="pwdcheck" class="form-control" placeholder="비밀번호확인">
 			       </div>
-		       </div>
-		       
+		       </div>		       
 		       <div class="row" style="margin-bottom: 2%">
-		          <div class="col-md-12" style="margin-top: 1%; margin-left: 43%;" >
+		          <div class="col-md-12" style="margin-left: 43%;" >
 		          	<button type="button" id="btnUpdate" class="btn"><span style="font-size: 9pt;">비밀번호 변경</span></button>
 		          </div>
 		       </div>       

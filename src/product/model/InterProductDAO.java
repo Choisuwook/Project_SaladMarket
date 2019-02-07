@@ -87,5 +87,7 @@ public interface InterProductDAO {
 	ProductVO getPackageProduct(int pacnum) throws SQLException;
 	
 	ProductVO getPackageOne(int pacnum) throws SQLException;
+	// ***패키지 상품 명 불러오기 ***
+	List<ProductVO> getPackageName() throws SQLException ;
 	
 }

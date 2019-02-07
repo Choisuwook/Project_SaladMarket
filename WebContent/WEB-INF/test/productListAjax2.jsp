@@ -124,7 +124,7 @@
 				}else{// 데이터가 존재하는 경우라면					
 					$.each(json, function(entryIndex, entry){ 
 			        	  html += "<div style=\"display: inline-block; margin: 30px; border: solid gray 1px;\" align=\"left\">"+
-			        	  		  "<input type='text' value='"+${entry.pacname}+"'/>" 
+			        	  		  "<input type='hidden' value='"+${entry.pacname}+"'/>" 
 			        	        + "  <a href=\"/MyMVC/prodView.do?pnum="+entry.pnum+"\">"
 			        	        + "    <img width=\"120px;\" height=\"130px;\" src=\"images/"+entry.pimage1+"\">"
 			        	        + "  </a><br/>"
