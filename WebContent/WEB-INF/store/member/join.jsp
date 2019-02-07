@@ -235,17 +235,11 @@ function goRegister(event) {
                   <input type="text" id="userid" name="userid" class="form-control requiredinfo" placeholder="ID">   
                   <span class="error_idCheck" style="color: blue; font-size: 12px;">아이디 확인 버튼을 누르세요.</span>             
                </div>
-<<<<<<< HEAD
-               <div class="col-md-4" style="margin-top:5.5%">
-                  <button type="button" class="btn" style="width: 80px; height: 20px; padding: 0%;"><span style="font-size: 2px;" id="idCheck" >아이디 확인</span></button>
-                  <br/><span id="error" style="color: red; font-weight: bold;"></span>
-				  <span id="good" style="color:blue;font-weight:bold; margin:5%"></span>
-=======
+
                <div class="col-md-2" style="margin-top:8.5%">
                   <button type="button" class="btn" style="width: 80px; height: 20px; padding: 0%;"><span style="font-size: 2px;" id="idCheck" >아이디 확인</span></button>
                   <br/><span id="error" style="color: red; font-weight: bold;"></span>
 				  <span id="good" style="color: blue; font-weight: bold;"></span>
->>>>>>> branch 'master' of http://github.com/Choisuwook/Project_saladMarket.git
 <!--                </div>               
                <div class="col-md-4 error" style="margin-top:8.5%"> -->
 				
