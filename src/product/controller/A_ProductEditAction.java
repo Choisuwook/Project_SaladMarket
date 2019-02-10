@@ -17,8 +17,10 @@ public class A_ProductEditAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
+		String pnum = req.getParameter("pnum");
+		
 		InterProductDAO pdao = new ProductDAO();
+		List<ProductVO> packageName = pdao.getPackageName();
 		// *** 이벤트 태그(etname) 목록 불러오기 ***
 		List<ProductVO> etnameList = pdao.etnameList(); 
 		// *** 스펙 태그(stname) 목록 불러오기 ***
@@ -27,7 +29,8 @@ public class A_ProductEditAction extends AbstractController {
 		List<ProductVO> sdnameList = pdao.sdnameList();
 		// *** 카테고리 태그(ctname) 목록 불러오기 ***
 		List<ProductVO> ctnameList = pdao.ctnameList();
-
+		
+		req.setAttribute("packageName", packageName);
 		req.setAttribute("etnameList", etnameList);
 		req.setAttribute("stnameList", stnameList);
 		req.setAttribute("sdnameList", sdnameList);

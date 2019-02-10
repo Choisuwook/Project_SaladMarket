@@ -1,66 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+    pageEncoding="UTF-8"%>   
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <jsp:include page="admin_header.jsp"/> 
 
 <script type="text/javascript">
   $(document).ready(function() {		
-
-		$.ajax({
-			url:"a_productJSON.do",
-			type:"GET",
-			dataType:"JSON",
-			success:function(json){
-				var html ="";
-				$.each(json,function(entryIndex,entry){
-					html ="<tr>"+"<td class='text-center'></td>"+
-								"<td>"+entry.pnum+"</td>"+
-					            "<td>"+entry.pname+"</td>"+			           
-					            "<td>"+entry.saleprice+"</td>"+
-					            "<td>"+entry.pqty+"</td>"+
-					            "<td class='td-actions text-right'>"+
-					            "  <button type='button' rel='tooltip' class='btn btn-info btn-sm btn-icon' OnClick='goDetail("+entry.pnum+");'>"+
-				              "      <i class='tim-icons icon-single-copy-04'></i>"+
-				               " </button>"+
-				                "<button type='button' rel='tooltip'class='btn btn-success btn-sm btn-icon'>"+
-				                 "   <i class='tim-icons icon-settings'></i>"+
-				               " </button>"+
-				               " <button type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
-				                "    <i class='tim-icons icon-simple-remove'></i>"+
-				               " </button>"+
-				            "</td>"+
-				            "</tr>"+
-				            "<td> <input type='hidden' value="+entry.pnum+"></td>";
-					 $("#productList").append(html);
-				});// end of each
-				
-			},	error: function(request, status, error){
-				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+  	
+		$("#sizePerPage").val("${sizePerPage}");
+		$("#searchWord").val("${searchWord}");
+		$("#searchWord").keydown(function(event){
+			if(event.keyCode == 13) {
+				 goSearch();
 			}
-		});//end of ajax
-	});// end of ready
-	
-	
+		});
+		
+  }); // end of $(document).ready()--------------
+  
+  
+  function goSearch() {
+  	
+  	var searchWord = $("#searchWord").val().trim();
+  	alert(searchWord);
+  	if(searchWord == "") {
+  		alert("검색어를 입력하세요!!");
+  		return;
+  	}
+  	else {
+  		var frm = document.productFrm;
+  		frm.method = "GET";
+  		frm.action = "a_productList.do";
+  		frm.submit();
+  	}
+  	
+  }// end of function goSearch()-----------------
  	function goDetail(event) {		
-		alert(event);
+		
 		var frm = document.productFrm;
 		frm.method = "POST";
 		frm.action = "a_productDetail.do?pnum="+event;
 		frm.submit();  
 		
 	} // end of goDetail()----------------------------
-
+ 	function goEdit(event) {				
+		var frm = document.productFrm;
+		frm.method = "POST";
+		frm.action = "a_productEdit.do?pnum="+event;
+		frm.submit();  		
+	} // end of goDetail()----------------------------
 
 </script>
- 
+ <form name="productFrm">
 <div class="form-inline ml-auto" style="margin-left: 65%;">
  <div class="form-group no-border">
-   <input type="text" class="form-control" placeholder="Search">
+   <input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색">
  </div>
- <button type="submit" class="btn btn-link btn-icon btn-round">
+ <button type="button" class="btn btn-link btn-icon btn-round" onClick="goSearch();">
      <i class="tim-icons icon-zoom-split"></i>
  </button>
 </div>
-<form name="productFrm">
+
 <table class="table">
     <thead>
         <tr>
@@ -71,13 +69,31 @@
             <th>재고량</th>
             <th class="text-right">상세&nbsp;&nbsp;&nbsp;&nbsp;수정&nbsp;&nbsp;&nbsp;&nbsp;삭제</th>
         </tr>
-    </thead>
+            </thead>
     <tbody id="productList">
-    <tr>
-    </tr>
+    	<c:forEach var="product" items="${productList}">
+		     <tr><td class="text-center"></td>
+	    	  <td>${product.pnum}</td>
+			  <td>${product.pname}</td>			           
+	          <td>${product.saleprice}</td>
+	          <td>${product.pqty}</td>
+	          <td class="td-actions text-right">
+	           <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-icon" OnClick="goDetail(${product.pnum});">
+	               <i class="tim-icons icon-single-copy-04"></i>
+	          </button>
+	            <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon" OnClick="goEdit(${product.pnum});">
+	               <i class="tim-icons icon-settings"></i>
+	            </button>
+	            <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+	                <i class="tim-icons icon-simple-remove"></i>
+	            </button>
+	        </td>
+	        </tr>
+	        <td><input type="hidden" value="${product.pnum}"></td>     
+ 		</c:forEach> 
     </tbody>   
 </table>
-<span>{pageBar}</span>
+<div style="text-align: center; align-content: center; vertical-align: center;"><span>${pageBar}</span></div>
 </form>
 <jsp:include page="admin_footer.jsp"/> 
 

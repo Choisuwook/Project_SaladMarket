@@ -49,19 +49,19 @@ public interface InterProductDAO {
 	List<ProductVO> getSdnameProList(String sdname,int sizePerPage, int currentShowPageNo) throws SQLException;
 
 	// ** admin 전체상품목록 보기(상품리스트 가져오는 추상메소드)
-	List<ProductVO> adminProductList() throws SQLException;
+	List<ProductVO> adminProductList(int sizePerPage, int currentShowPageNo,String searchWord) throws SQLException;
 
 	// ** admin 패키지 제품 목록 불러오는 추상 메소드
 	List<ProductVO> adminProductPacList() throws SQLException;
 	
-	
-
-	// ** admin 제품상세보기 제품 상세 정보 메소드
+		// ** admin 제품상세보기 제품 상세 정보 메소드
 	ProductVO adminProductList(int pnum) throws SQLException;
+	
 	// ** admin 제품 pnum으로 제품 상세 이미지 불러오는 추상 메소드
 	ProductVO adminProductDetailImg(int pnum) throws SQLException;
 
-
+	// *** admin 검색어가 있는 상품 총 갯수 불러오는 추상 메소드 (페이징처리) ***
+	int getProductCount(String search) throws SQLException;
 	// *** 이벤트 태그(etname) 목록 불러오기 ***
 	List<ProductVO> etnameList() throws SQLException;
 	// *** 스펙 태그(stname) 목록 불러오기 ***

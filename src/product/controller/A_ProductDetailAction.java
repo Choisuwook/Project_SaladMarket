@@ -1,5 +1,7 @@
 package product.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,16 +18,23 @@ public class A_ProductDetailAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		InterProductDAO pdao = new ProductDAO();
-		String pnum = req.getParameter("pnum");
-		System.out.println("pnum: "+pnum);
-		ProductVO pvoImg = pdao.adminProductDetailImg(Integer.parseInt(pnum));
-		ProductVO pvo = pdao.adminProductList(Integer.parseInt(pnum));
-
-		req.setAttribute("pvoImg", pvoImg);
-		req.setAttribute("pvo", pvo);	
-		req.setAttribute("pnum", pnum);
-
+		InterProductDAO dao = new ProductDAO();
+		//상품패키지
+		List<ProductVO> packageName = dao.getPackageName();	
+		//소분류상세
+		List<ProductVO> subclassTag = dao.sdnameList();
+		//카테고리테그
+		List<ProductVO> categoryTag = dao.ctnameList();
+		//스펙테그
+		List<ProductVO> specTag = dao.stnameList(); 
+		//이벤트테그
+		List<ProductVO> eventTag = dao.etnameList();
+		req.setAttribute("packageName", packageName);
+		req.setAttribute("subclassTag", subclassTag);
+		req.setAttribute("categoryTag", categoryTag);
+		req.setAttribute("specTag", specTag);
+		req.setAttribute("eventTag", eventTag);
+		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/admin/a_productDetail.jsp");
 

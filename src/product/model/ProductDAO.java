@@ -1309,23 +1309,35 @@ public class ProductDAO implements InterProductDAO {
 		return productList;	
 	}
 
-
-
 	// ** admin 전체상품목록 보기(상품리스트 가져오는 메소드)
 	@Override
-	public List<ProductVO> adminProductList() throws SQLException {
+	public List<ProductVO> adminProductList(int sizePerPage, int currentShowPageNo,String searchWord) throws SQLException {
 
 		List<ProductVO> productList = null;
-
+		if(searchWord == null) searchWord = "";
 		try {
 			conn = ds.getConnection();
-
-			String sql = " select pnum,fk_pacname,fk_ctname,fk_stname,fk_etname,fk_sdname,pname,plike,price,price"+
-					",saleprice,salecount,point,pqty,pcontents,pcompanyname,pexpiredate,allergy,weight \n"+
-					" from product A join product_package B\n"+
-					" on A.fk_pacname=B.pacname";
+			String sql = "select rno,pnum,fk_pacname,fk_ctname,fk_stname,fk_etname,fk_sdname,pname,plike,price \n"+
+					"    ,saleprice,salecount,point,pqty,pcontents,pcompanyname,pexpiredate,allergy,weight \n"+
+					"from\n"+
+					"(\n"+
+					"    select rownum AS rno,pnum,fk_pacname,fk_ctname,fk_stname,fk_etname,fk_sdname,pname,plike,price \n"+
+					"        ,saleprice,salecount,point,pqty,pcontents,pcompanyname,pexpiredate,allergy,weight \n"+
+					"    from \n"+
+					"    (\n"+
+					"        select pnum,fk_pacname,fk_ctname,fk_stname,fk_etname,fk_sdname,pname,plike,price \n"+
+					"        ,saleprice,salecount,point,pqty,pcontents,pcompanyname,pexpiredate,allergy,weight \n"+
+					"        from product \n"+
+					"        order by pnum desc \n"+
+					"     )T \n"+
+					"     where fk_pacname like '%'|| ? || '%' or pname like '%'|| ? || '%' \n"+
+					" )V    \n"+
+					" where rno between ? and ? ";
 			pstmt = conn.prepareStatement(sql);
-
+			pstmt.setString(1, searchWord);
+			pstmt.setString(2, searchWord);
+			pstmt.setInt(3, (currentShowPageNo*sizePerPage) - (sizePerPage - 1)); // 공식!!!
+			pstmt.setInt(4, (currentShowPageNo*sizePerPage));
 			rs = pstmt.executeQuery();
 
 			int cnt = 0;
@@ -1436,7 +1448,7 @@ public class ProductDAO implements InterProductDAO {
 		return packList;
 	}
 
-	// admin 제품상세보기 제품 상세 정보 메소드
+	// *** admin 제품상세보기 제품 상세 정보 메소드
 	@Override
 	public ProductVO adminProductList(int pnum) throws SQLException {
 
@@ -1849,6 +1861,7 @@ public class ProductDAO implements InterProductDAO {
 
 		return packageNameList;
 	}
+	
 	@Override
 	public int getNextPnum() throws SQLException {
 		conn=ds.getConnection();
@@ -1943,12 +1956,30 @@ public class ProductDAO implements InterProductDAO {
 		}
 		return n;
 	}
+	
+	// *** admin 검색어가 있는 상품 총 갯수 불러오는 추상 메소드 (페이징처리) ***
+	@Override
+	public int getProductCount(String search) throws SQLException {
+		conn = ds.getConnection();
+		int count =0;
+		
+		try {
+			String sql = "select count(*) AS count from product where pname like '%'|| ? ||'%' or fk_pacname like  '%'|| ? || '%'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			count = rs.getInt("count");
+			
+		} finally {
+			close();
+		}
+		return count;
+	}
 
-
-
-
-
-
+	
 
 
 }
